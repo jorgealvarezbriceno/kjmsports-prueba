@@ -3,36 +3,46 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import Productos from './pages/Productos';
+import DetalleProducto from './pages/DetalleProducto';
 import Nosotros from './pages/Nosotros';
 import Blog from './pages/Blog';
 import Login from './pages/Login';
 import Carrito from './pages/Carrito';
-import Contactanos from './pages/Contactanos'; // ⬅️ 1. NUEVA IMPORTACIÓN
+import Contactanos from './pages/Contactanos';
+import { CartProvider } from './context/CartContext';
+import { AuthProvider } from './context/AuthContext';
+import Registro from './pages/Registro';
 
 function App() {
   return (
-    <Router>
-      <Navbar />
-      
-      {/* 🟢 CONTENEDOR CENTRAL DE ANCHO LIMITADO */}
-      <div className="content-container"> 
-        <main style={{ minHeight: '80vh' }}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/productos" element={<Productos />} />
-            <Route path="/nosotros" element={<Nosotros />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/carrito" element={<Carrito />} />
-            <Route path="/contactanos" element={<Contactanos />} /> {/* ⬅️ 2. NUEVA RUTA */}
-            {/* Opcional: Si quieres un componente separado para Registro */}
-            {/* <Route path="/registro" element={<Registro />} /> */}
-          </Routes>
-        </main>
-      </div> 
-      
-      <Footer />
-    </Router>
+    <AuthProvider>
+      <CartProvider>
+        <Router>
+          <Navbar />
+
+          {/* 🟢 CONTENEDOR CENTRAL DE ANCHO LIMITADO */}
+          <div className="content-container">
+            <main style={{ minHeight: '80vh' }}>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/productos" element={<Productos />} />
+                <Route path="/producto/:id" element={<DetalleProducto />} />
+                <Route path="/nosotros" element={<Nosotros />} />
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/registro" element={<Registro />} />
+                <Route path="/carrito" element={<Carrito />} />
+                <Route path="/contactanos" element={<Contactanos />} /> {/* ⬅️ 2. NUEVA RUTA */}
+                {/* Opcional: Si quieres un componente separado para Registro */}
+                {/* <Route path="/registro" element={<Registro />} /> */}
+              </Routes>
+            </main>
+          </div>
+
+          <Footer />
+        </Router>
+      </CartProvider>
+    </AuthProvider>
   );
 }
 

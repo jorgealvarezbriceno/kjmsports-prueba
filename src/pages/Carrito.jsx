@@ -8,13 +8,13 @@ const formatPrice = (price) => {
         style: 'currency',
         currency: 'CLP',
         minimumFractionDigits: 0,
-        maximumFractionDigits: 0, 
+        maximumFractionDigits: 0,
     });
 };
 
 const Carrito = () => {
     // Obtenemos las nuevas funciones
-    const { cart, addToCart, decreaseQuantity, removeFromCart } = useCart();
+    const { cart, increaseQuantity, decreaseQuantity, removeFromCart } = useCart();
 
     // 🟢 Función para calcular el total
     const calculateTotal = () => {
@@ -35,47 +35,47 @@ const Carrito = () => {
                 </div>
             ) : (
                 <div className="row">
-                    
+
                     {/* Columna Izquierda: Lista de Ítems (Ancho 8) */}
                     <div className="col-lg-8">
                         <h4 className="mb-3">Artículos</h4>
                         {cart.map((item) => (
-                            <div 
-                                key={item.id} 
+                            <div
+                                key={item.id}
                                 className="card mb-3 shadow-sm d-flex flex-row align-items-center"
                             >
-                                <img 
+                                <img
                                     src={item.imagen}
-                                    alt={item.nombre} 
+                                    alt={item.nombre}
                                     style={{ width: '80px', height: '80px', objectFit: 'cover', margin: '15px' }}
                                     className="rounded"
                                 />
-                                
+
                                 <div className="card-body d-flex justify-content-between align-items-center p-3 w-100">
                                     <div style={{ flexGrow: 1 }}>
                                         <h5 className="card-title mb-1">{item.nombre}</h5>
                                         {/* Precio total del ítem */}
                                         <p className="card-text text-muted mb-0">Total: **{formatPrice(item.precio * item.quantity)}**</p>
                                     </div>
-                                    
+
                                     <div className="d-flex align-items-center me-3">
                                         {/* 🟢 CONTROLES DE CANTIDAD */}
-                                        <button 
+                                        <button
                                             className="btn btn-sm btn-outline-secondary"
                                             onClick={() => decreaseQuantity(item.id)}
                                         >
                                             -
                                         </button>
                                         <span className="mx-2 fw-bold">{item.quantity}</span>
-                                        <button 
+                                        <button
                                             className="btn btn-sm btn-outline-secondary"
-                                            onClick={() => addToCart(item)}
+                                            onClick={() => increaseQuantity(item.id)}
                                         >
                                             +
                                         </button>
                                     </div>
-                                    
-                                    <button 
+
+                                    <button
                                         className="btn btn-danger btn-sm"
                                         onClick={() => removeFromCart(item.id)}
                                     >

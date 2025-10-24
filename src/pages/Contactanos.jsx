@@ -27,11 +27,37 @@ const Contactanos = () => {
             setMessage({ type: 'error', text: 'Por favor, completa todos los campos.' });
             return;
         }
+        // Validaciones detalladas
+        if (!formData.nombre.trim()) {
+            setMessage({ type: 'error', text: 'Por favor, ingresa tu nombre.' });
+            return;
+        }
 
-        // Simulación de envío
-        console.log('Mensaje enviado:', formData);
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(formData.correo)) {
+            setMessage({ type: 'error', text: 'Por favor, ingresa un correo electrónico válido.' });
+            return;
+        }
+
+        if (formData.mensaje.trim().length < 10) {
+            setMessage({ type: 'error', text: 'El mensaje debe tener al menos 10 caracteres.' });
+            return;
+        }
+
+        // Guardar mensaje en localStorage
+        const mensajes = JSON.parse(localStorage.getItem('mensajes') || '[]');
+        const nuevoMensaje = {
+            ...formData,
+            id: Date.now(),
+            fecha: new Date().toISOString()
+        };
+        mensajes.push(nuevoMensaje);
+        localStorage.setItem('mensajes', JSON.stringify(mensajes));
+
+        // Mostrar mensaje de éxito
         setMessage({ type: 'success', text: '¡Mensaje enviado con éxito! Te responderemos pronto.' });
-        
+        setMessage({ type: 'success', text: '¡Mensaje enviado con éxito! Te responderemos pronto.' });
+
         // Limpiar formulario
         setFormData({ nombre: '', correo: '', mensaje: '' });
     };
@@ -49,10 +75,10 @@ const Contactanos = () => {
         <div className="container my-5">
             <div className="row justify-content-center">
                 <div className="col-lg-6 col-md-8">
-                    
+
                     {/* 🟢 CORRECCIÓN AQUÍ: Usamos bg-light para un gris muy claro */}
-                    <div className="card p-4 shadow-lg bg-light"> 
-                        
+                    <div className="card p-4 shadow-lg bg-light">
+
                         {/* El texto del título es oscuro por defecto, pero si necesitas forzarlo: text-dark */}
                         <h2 className="text-center mb-4 display-6 fw-bold">Contactanos</h2>
 
@@ -61,16 +87,16 @@ const Contactanos = () => {
                                 {message.text}
                             </div>
                         )}
-                        
+
                         <form onSubmit={handleSubmit}>
-                            
+
                             {/* Campo Nombre */}
                             <div className="mb-3">
                                 <label htmlFor="nombre" className="form-label fw-bold">Nombre</label>
                                 {/* Inputs con fondo blanco por defecto, se ven bien con card bg-light */}
                                 <input
                                     type="text"
-                                    className="form-control" 
+                                    className="form-control"
                                     id="nombre"
                                     name="nombre"
                                     value={formData.nombre}
@@ -112,11 +138,11 @@ const Contactanos = () => {
                                 <button type="submit" className="btn btn-lg" style={buttonStyle}>
                                     Enviar Mensaje
                                 </button>
-                                
+
                                 {/* Enlaces de Registro/Inicio de Sesión, con color primario por defecto de Bootstrap */}
                                 <div className="text-end">
-                                    <Link to="/login" className="text-primary text-decoration-none me-3">Inicia sesión</Link> 
-                                    <span className="text-muted">·</span> 
+                                    <Link to="/login" className="text-primary text-decoration-none me-3">Inicia sesión</Link>
+                                    <span className="text-muted">·</span>
                                     <Link to="/registro" className="text-primary text-decoration-none ms-3">Registro</Link>
                                 </div>
                             </div>
