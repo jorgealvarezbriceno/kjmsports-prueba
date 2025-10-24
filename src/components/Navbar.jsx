@@ -1,0 +1,122 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+import useCart from '../hooks/useCart';
+import kjmsportsLogo from '../assets/images/logo1.jpg'; 
+// Recuerda que necesitas Font Awesome en index.html para el ícono del carrito
+
+// FUNCIÓN DE FORMATO CLP (La misma que usamos en Productos.jsx)
+const formatPrice = (price) => {
+    return price.toLocaleString('es-CL', {
+        style: 'currency',
+        currency: 'CLP',
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0, 
+    });
+};
+
+const Navbar = () => {
+    const { cart, removeFromCart } = useCart();
+    
+    const calculateSubtotal = () => {
+        const total = cart.reduce((sum, item) => sum + parseFloat(item.precio), 0);
+        return formatPrice(total);
+    };
+
+    const handleRemove = (e, index) => {
+        e.stopPropagation();
+        removeFromCart(index);
+    };
+    
+    return (
+        <header className="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div className="container-fluid">
+                
+                {/* Logo y Marca: Alineado a la izquierda por defecto */}
+                <Link to="/" className="navbar-brand d-flex align-items-center">
+                    <img 
+                        src={kjmsportsLogo} 
+                        alt="Logo KJM SPORTS" 
+                        style={{ height: '50px', width: 'auto', marginRight: '10px' }} 
+                    />
+                    KJM SPORTS
+                </Link>
+                
+                {/* Botón Hamburguesa... */}
+                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span className="navbar-toggler-icon"></span>
+                </button>
+
+                {/* Menú de Navegación y Carrito */}
+                {/* 🟢 CORRECCIÓN: Quitamos 'justify-content-end' y añadimos 'me-auto' al menú */}
+                <div className="collapse navbar-collapse" id="navbarNav">
+                    
+                    {/* 🟢 Menú de Enlaces: Usamos 'me-auto' para empujar el carrito a la derecha */}
+                    <ul className="navbar-nav me-auto mb-2 mb-lg-0 align-items-lg-center">
+                        <li className="nav-item"><Link to="/" className="nav-link">Inicio</Link></li>
+                        <li className="nav-item"><Link to="/productos" className="nav-link">Productos</Link></li>
+                        <li className="nav-item"><Link to="/nosotros" className="nav-link">Nosotros</Link></li>
+                        <li className="nav-item"><Link to="/blog" className="nav-link">Blog</Link></li>
+                        <li className="nav-item"><Link to="/contactanos" className="nav-link">Contáctanos</Link></li>
+                        <li className="nav-item"><Link to="/login" className="nav-link">Login</Link></li>
+                    </ul>
+                    
+                    {/* 🛒 Botón del carrito: Ahora está a la derecha del menú gracias a 'me-auto' 🛒 */}
+                    <ul className="navbar-nav align-items-lg-center">
+                        <li className="nav-item dropdown">
+                            <button 
+                                className="btn btn-warning dropdown-toggle"
+                                type="button" 
+                                id="cartDropdown" 
+                                data-bs-toggle="dropdown" 
+                                aria-expanded="false"
+                            >
+                                <i className="fas fa-shopping-cart"></i> 
+                                <span className="badge bg-danger text-light ms-1">{cart.length}</span>
+                            </button>
+
+                            <ul 
+                                className="dropdown-menu dropdown-menu-end" 
+                                aria-labelledby="cartDropdown" 
+                                style={{ minWidth: '320px' }}
+                            >
+                                {cart.length === 0 ? (
+                                    <li className="dropdown-item text-muted text-center">Tu carrito está vacío</li>
+                                ) : (
+                                    <>
+                                        {cart.map((item, index) => (
+                                            <li key={index}>
+                                                <div className="dropdown-item d-flex justify-content-between align-items-center">
+                                                    <span>{item.nombre.substring(0, 20)}... - {formatPrice(item.precio)}</span>
+                                                    
+                                                    <button 
+                                                        className="btn btn-sm btn-danger ms-2" 
+                                                        onClick={(e) => handleRemove(e, index)}
+                                                    >
+                                                        Eliminar
+                                                    </button>
+                                                </div>
+                                            </li>
+                                        ))}
+                                        <li><hr className="dropdown-divider" /></li>
+                                        
+                                        <li className="px-3 py-1">
+                                            <div className="d-flex justify-content-between fw-bold mb-2">
+                                                <span>Subtotal:</span>
+                                                <span>{calculateSubtotal()}</span>
+                                            </div>
+                                            <Link to="/carrito" className="btn btn-primary w-100">
+                                                Ver Carrito ({cart.length})
+                                            </Link>
+                                        </li>
+                                    </>
+                                )}
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+    );
+};
+
+export default Navbar;
