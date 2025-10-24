@@ -12,6 +12,7 @@ import Contactanos from './pages/Contactanos';
 import { CartProvider } from './context/CartContext';
 import { AuthProvider } from './context/AuthContext';
 import Registro from './pages/Registro';
+import Perfil from './pages/Perfil';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
                 <Route path="/blog" element={<Blog />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/registro" element={<Registro />} />
+                <Route path="/perfil" element={<Perfil />} />
                 <Route path="/carrito" element={<Carrito />} />
                 <Route path="/contactanos" element={<Contactanos />} /> {/* ⬅️ 2. NUEVA RUTA */}
                 {/* Opcional: Si quieres un componente separado para Registro */}
