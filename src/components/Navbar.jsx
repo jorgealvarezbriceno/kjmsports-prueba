@@ -56,7 +56,6 @@ const Navbar = () => {
                 </button>
 
                 {/* Menú de Navegación y Carrito */}
-                {/* 🟢 CORRECCIÓN: Quitamos 'justify-content-end' y añadimos 'me-auto' al menú */}
                 <div className="collapse navbar-collapse" id="navbarNav">
 
                     {/* 🟢 Menú de Enlaces: Usamos 'me-auto' para empujar el carrito a la derecha */}
@@ -66,7 +65,7 @@ const Navbar = () => {
                         <li className="nav-item"><Link to="/nosotros" className="nav-link">Nosotros</Link></li>
                         <li className="nav-item"><Link to="/blog" className="nav-link">Blog</Link></li>
                         <li className="nav-item"><Link to="/contactanos" className="nav-link">Contáctanos</Link></li>
-                        <li className="nav-item"><Link to="/login" className="nav-link">Login</Link></li>
+                        
                     </ul>
 
                     {/* 🛒 Botón del carrito: Ahora está a la derecha del menú gracias a 'me-auto' 🛒 */}
