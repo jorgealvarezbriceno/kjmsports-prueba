@@ -81,4 +81,5 @@ export const productosData = [
         descripcion: 'Camiseta oficial de Erling Haaland, perfecta para los fanáticos del fútbol.',
         unidad_moneda: 'CLP'
     },
+    
 ];
