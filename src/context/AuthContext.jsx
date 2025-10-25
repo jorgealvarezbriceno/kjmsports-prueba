@@ -7,11 +7,49 @@ const AuthProvider = ({ children }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
     useEffect(() => {
-        const savedUser = localStorage.getItem('user');
-        if (savedUser) {
-            setUser(JSON.parse(savedUser));
-            setIsAuthenticated(true);
-        }
+        const syncSavedUser = () => {
+            const savedUser = localStorage.getItem('user');
+            if (savedUser) {
+                try {
+                    const parsed = JSON.parse(savedUser);
+                    // intenta obtener la versión más reciente desde la lista `users`
+                    const users = JSON.parse(localStorage.getItem('users') || '[]');
+                    const fresh = users.find(u => u.correo === parsed.correo) || parsed;
+                    setUser(fresh);
+                    setIsAuthenticated(true);
+                } catch (err) {
+                    console.warn('AuthContext: fallo al parsear user desde localStorage', err);
+                }
+            }
+        };
+
+        syncSavedUser();
+
+        // Escucha cambios de localStorage desde otras pestañas/ventanas
+        const onStorage = (e) => {
+            if (e.key === 'user') {
+                if (e.newValue) {
+                    try { setUser(JSON.parse(e.newValue)); setIsAuthenticated(true); } catch { };
+                } else {
+                    setUser(null); setIsAuthenticated(false);
+                }
+            }
+
+            if (e.key === 'users') {
+                // si el usuario actual existe, intenta sincronizar su rol/props actualizados
+                const current = JSON.parse(localStorage.getItem('user') || 'null');
+                if (current) {
+                    try {
+                        const users = JSON.parse(e.newValue || '[]');
+                        const fresh = users.find(u => u.correo === current.correo);
+                        if (fresh) setUser(fresh);
+                    } catch { }
+                }
+            }
+        };
+
+        window.addEventListener('storage', onStorage);
+        return () => window.removeEventListener('storage', onStorage);
     }, []);
 
     const register = (userData) => {

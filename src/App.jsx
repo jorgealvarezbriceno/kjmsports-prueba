@@ -13,6 +13,7 @@ import { CartProvider } from './context/CartContext';
 import { AuthProvider } from './context/AuthContext';
 import Registro from './pages/Registro';
 import Perfil from './pages/Perfil';
+import AdminDashboard from './pages/AdminDashboard';
 
 function App() {
   return (
@@ -34,9 +35,8 @@ function App() {
                 <Route path="/registro" element={<Registro />} />
                 <Route path="/perfil" element={<Perfil />} />
                 <Route path="/carrito" element={<Carrito />} />
-                <Route path="/contactanos" element={<Contactanos />} /> {/* ⬅️ 2. NUEVA RUTA */}
-                {/* Opcional: Si quieres un componente separado para Registro */}
-                {/* <Route path="/registro" element={<Registro />} /> */}
+                <Route path="/contactanos" element={<Contactanos />} />
+                <Route path="/admin" element={<AdminDashboard />} />
               </Routes>
             </main>
           </div>

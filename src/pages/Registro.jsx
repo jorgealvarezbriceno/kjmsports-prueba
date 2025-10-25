@@ -9,15 +9,16 @@ const Registro = () => {
         nombre: '',
         correo: '',
         password: '',
-        confirmPassword: ''
+        confirmPassword: '',
+        isAdmin: false
     });
     const [error, setError] = useState('');
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
+        const { name, value, type, checked } = e.target;
         setFormData(prevData => ({
             ...prevData,
-            [name]: value
+            [name]: type === 'checkbox' ? checked : value
         }));
     };
 
@@ -51,7 +52,8 @@ const Registro = () => {
             await register({
                 nombre: formData.nombre,
                 correo: formData.correo,
-                password: formData.password
+                password: formData.password,
+                isAdmin: formData.isAdmin
             });
             navigate('/'); // Redirigir al inicio después del registro exitoso
         } catch (error) {
@@ -131,6 +133,22 @@ const Registro = () => {
                                     onChange={handleChange}
                                     required
                                 />
+                            </div>
+
+                            <div className="mb-4">
+                                <div className="form-check">
+                                    <input
+                                        type="checkbox"
+                                        className="form-check-input"
+                                        id="isAdmin"
+                                        name="isAdmin"
+                                        checked={formData.isAdmin}
+                                        onChange={handleChange}
+                                    />
+                                    <label className="form-check-label" htmlFor="isAdmin">
+                                        Registrar como administrador
+                                    </label>
+                                </div>
                             </div>
 
                             <div className="d-flex justify-content-between align-items-center">

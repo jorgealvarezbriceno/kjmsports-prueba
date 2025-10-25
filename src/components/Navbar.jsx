@@ -66,7 +66,6 @@ const Navbar = () => {
                         <li className="nav-item"><Link to="/nosotros" className="nav-link">Nosotros</Link></li>
                         <li className="nav-item"><Link to="/blog" className="nav-link">Blog</Link></li>
                         <li className="nav-item"><Link to="/contactanos" className="nav-link">Contáctanos</Link></li>
-                        <li className="nav-item"><Link to="/login" className="nav-link">Login</Link></li>
                     </ul>
 
                     {/* 🛒 Botón del carrito: Ahora está a la derecha del menú gracias a 'me-auto' 🛒 */}
@@ -143,6 +142,11 @@ const Navbar = () => {
                                     <li>
                                         <button className="dropdown-item" onClick={() => navigate('/perfil')}>Mi Perfil</button>
                                     </li>
+                                    {user?.isAdmin && (
+                                        <li>
+                                            <button className="dropdown-item" onClick={() => navigate('/admin')}>Panel Admin</button>
+                                        </li>
+                                    )}
                                     <li>
                                         <button className="dropdown-item text-danger" onClick={handleLogout}>Cerrar sesión</button>
                                     </li>
