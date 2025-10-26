@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { productosData } from '../data/productos';
 import useCart from '../hooks/useCart';
 
-// Reutilizamos el formato de precio del Navbar
+
 const formatPrice = (price) => {
   return price.toLocaleString('es-CL', {
     style: 'currency',
@@ -14,7 +14,7 @@ const formatPrice = (price) => {
 };
 
 const Categoria = () => {
-  const { slug } = useParams(); // Ej: "correr", "futbol", "natacion"
+  const { slug } = useParams();
   const { addToCart } = useCart();
 
   // Filtrar productos por categoría
@@ -22,7 +22,7 @@ const Categoria = () => {
     (producto) => producto.categoria === slug
   );
 
-  // Mapear slug a nombre bonito
+  // Mapear slug a nombre de categoría
   const nombreCategoria = {
     correr: 'Correr',
     futbol: 'Fútbol',
@@ -33,7 +33,7 @@ const Categoria = () => {
   // Manejar clic en "Agregar al carrito"
   const handleAddToCart = (producto) => {
     addToCart(producto);
-    // Opcional: mostrar toast
+
   };
 
   return (

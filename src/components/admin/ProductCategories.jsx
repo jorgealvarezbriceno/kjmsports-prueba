@@ -1,14 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { useCategories } from '../../context/CategoryContext';
 
 const ProductCategories = () => {
-    const [categories, setCategories] = useState([]);
+    const { categories, addCategory, deleteCategory } = useCategories();
     const [newCategory, setNewCategory] = useState('');
     const [error, setError] = useState('');
-
-    useEffect(() => {
-        const savedCategories = JSON.parse(localStorage.getItem('productCategories') || '[]');
-        setCategories(savedCategories);
-    }, []);
 
     const handleAddCategory = (e) => {
         e.preventDefault();
@@ -17,22 +13,13 @@ const ProductCategories = () => {
             return;
         }
 
-        const category = {
-            id: Date.now(),
-            name: newCategory.trim()
-        };
-
-        const updatedCategories = [...categories, category];
-        setCategories(updatedCategories);
-        localStorage.setItem('productCategories', JSON.stringify(updatedCategories));
+        addCategory(newCategory);
         setNewCategory('');
         setError('');
     };
 
-    const handleDeeteCategory = (id) => {
-        const updatedCategories = categories.filter(cat => cat.id !== id);
-        setCategories(updatedCategories);
-        localStorage.setItem('productCategories', JSON.stringify(updatedCategories)); l
+    const handleDeleteCategory = (id) => {
+        deleteCategory(id);
     };
 
     return (
