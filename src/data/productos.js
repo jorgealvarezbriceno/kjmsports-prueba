@@ -17,6 +17,7 @@ export const productosData = [
     id: 1,
     nombre: 'Zapatillas ASICS Japan S - Masculino - Negro',
     precio: 55990,
+    precioOferta: 39990, // OFERTA: -29%
     imagen: productos1,
     descripcion: 'Confeccionadas con una mezcla de piel suave y disponibles en colores monocromáticos, el aspecto pulcro y atractivo de estas zapatillas te llevará de la oficina a la calle con gran estilo y comodidad.',
     unidad_moneda: 'CLP',
@@ -26,6 +27,7 @@ export const productosData = [
     id: 2,
     nombre: 'Zapatillas ASICS Novablast 5',
     precio: 75990,
+    precioOferta: 59990, // OFERTA: -21%
     imagen: productos2,
     descripcion: 'La entresuela y la geometría de la suela exterior de las zapatillas para correr NOVABLAST® 5 ayudan a producir una carrera llena de energía.',
     unidad_moneda: 'CLP',
@@ -46,6 +48,7 @@ export const productosData = [
     id: 4,
     nombre: 'Nike Phantom 6 Low Club',
     precio: 15750,
+    precioOferta: 9990, // OFERTA: -37%
     imagen: productos4,
     descripcion: 'Para comenzar o solo para jugar por diversión, los tacos Club te llevan al campo sin comprometer la calidad.',
     unidad_moneda: 'CLP',
@@ -55,6 +58,7 @@ export const productosData = [
     id: 5,
     nombre: 'Polera Anthony Edwards',
     precio: 12000,
+    precioOferta: 8900, // OFERTA: -26%
     imagen: productos5,
     descripcion: 'Representa a tu estrella en ascenso favorita con esta Anthony Edwards de adidas. Esta polera estampada celebra el juego dinámico y la energía infecciosa de uno de los jugadores más entretenidos.',
     unidad_moneda: 'CLP',
@@ -66,6 +70,7 @@ export const productosData = [
     id: 10,
     nombre: 'Lentes Natación Unisex Biofuse 2.0 Negro',
     precio: 24990,
+    precioOferta: 18990, // OFERTA: -24%
     imagen: productos10,
     descripcion: 'Nuestras gafas Biofuse acaban de mejorar. Presentamos Biofuse 2.0. Aún con nuestra tecnología Speedo Biofuse® de mayor venta',
     unidad_moneda: 'CLP',
@@ -75,6 +80,7 @@ export const productosData = [
     id: 11,
     nombre: 'Naricera Natación Speedo Biofuse Clear',
     precio: 15990,
+    precioOferta: 11990, // OFERTA: -25%
     imagen: productos11,
     descripcion: 'Nuestro clip para la nariz más cómodo hasta la fecha. El Clip para la Nariz Biofuse ofrece el nivel perfecto de seguridad y comodidad',
     unidad_moneda: 'CLP',

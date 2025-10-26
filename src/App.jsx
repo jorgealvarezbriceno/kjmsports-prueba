@@ -16,6 +16,7 @@ import Registro from './pages/Registro';
 import Perfil from './pages/Perfil';
 import AdminDashboard from './pages/AdminDashboard';
 import Categoria from './pages/Categoria';
+import Ofertas from './pages/Ofertas';
 
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
                   <Route path="/contactanos" element={<Contactanos />} />
                   <Route path="/admin" element={<AdminDashboard />} />
                   <Route path="/categoria/:slug" element={<Categoria />} />
+                  <Route path="/ofertas" element={<Ofertas />} />
 
 
                 </Routes>

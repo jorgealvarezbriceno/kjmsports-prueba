@@ -67,6 +67,11 @@ const Navbar = () => {
                         <li className="nav-item"><Link to="/nosotros" className="nav-link">Nosotros</Link></li>
                         <li className="nav-item"><Link to="/blog" className="nav-link">Blog</Link></li>
                         <li className="nav-item"><Link to="/contactanos" className="nav-link">Contáctanos</Link></li>
+                        <li className="nav-item">
+                            <Link to="/ofertas" className="nav-link text-danger fw-bold">
+                            <i className="fas fa-fire me-1"></i> Ofertas
+                            </Link>
+                            </li>
                         <li className="nav-item dropdown">
                             <a className="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
                                 Categorías
