@@ -65,6 +65,16 @@ const Navbar = () => {
                         <li className="nav-item"><Link to="/nosotros" className="nav-link">Nosotros</Link></li>
                         <li className="nav-item"><Link to="/blog" className="nav-link">Blog</Link></li>
                         <li className="nav-item"><Link to="/contactanos" className="nav-link">Contáctanos</Link></li>
+                        <li className="nav-item dropdown">
+  <a className="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+    Categorías
+  </a>
+  <ul className="dropdown-menu">
+    <li><Link to="/categoria/correr" className="dropdown-item">Correr</Link></li>
+    <li><Link to="/categoria/futbol" className="dropdown-item">Fútbol</Link></li>
+    <li><Link to="/categoria/natacion" className="dropdown-item">Natación</Link></li>
+  </ul>
+</li>
 
                     </ul>
 

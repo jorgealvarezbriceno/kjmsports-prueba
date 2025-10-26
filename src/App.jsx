@@ -14,6 +14,8 @@ import { AuthProvider } from './context/AuthContext';
 import Registro from './pages/Registro';
 import Perfil from './pages/Perfil';
 import AdminDashboard from './pages/AdminDashboard';
+import Categoria from './pages/Categoria';
+
 
 function App() {
   return (
@@ -22,7 +24,6 @@ function App() {
         <Router>
           <Navbar />
 
-          {/* 🟢 CONTENEDOR CENTRAL DE ANCHO LIMITADO */}
           <div className="content-container">
             <main style={{ minHeight: '80vh' }}>
               <Routes>
@@ -37,6 +38,9 @@ function App() {
                 <Route path="/carrito" element={<Carrito />} />
                 <Route path="/contactanos" element={<Contactanos />} />
                 <Route path="/admin" element={<AdminDashboard />} />
+                <Route path="/categoria/:slug" element={<Categoria />} />
+                
+                
               </Routes>
             </main>
           </div>
