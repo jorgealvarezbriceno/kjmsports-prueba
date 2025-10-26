@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-// ID del video de YouTube que ya tienes
+// ID del video de YouTube 
 const YOUTUBE_VIDEO_ID = 'mEgg83JgkFw'; 
 
 const Nosotros = () => {
