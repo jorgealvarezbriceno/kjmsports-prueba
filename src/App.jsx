@@ -11,38 +11,45 @@ import Carrito from './pages/Carrito';
 import Contactanos from './pages/Contactanos';
 import { CartProvider } from './context/CartContext';
 import { AuthProvider } from './context/AuthContext';
+import { CategoryProvider } from './context/CategoryContext';
 import Registro from './pages/Registro';
 import Perfil from './pages/Perfil';
 import AdminDashboard from './pages/AdminDashboard';
+import Categoria from './pages/Categoria';
+
 
 function App() {
   return (
     <AuthProvider>
       <CartProvider>
-        <Router>
-          <Navbar />
+        <CategoryProvider>
+          <Router>
+            <Navbar />
 
-          {/* 🟢 CONTENEDOR CENTRAL DE ANCHO LIMITADO */}
-          <div className="content-container">
-            <main style={{ minHeight: '80vh' }}>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/productos" element={<Productos />} />
-                <Route path="/producto/:id" element={<DetalleProducto />} />
-                <Route path="/nosotros" element={<Nosotros />} />
-                <Route path="/blog" element={<Blog />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/registro" element={<Registro />} />
-                <Route path="/perfil" element={<Perfil />} />
-                <Route path="/carrito" element={<Carrito />} />
-                <Route path="/contactanos" element={<Contactanos />} />
-                <Route path="/admin" element={<AdminDashboard />} />
-              </Routes>
-            </main>
-          </div>
+            <div className="content-container">
+              <main style={{ minHeight: '80vh' }}>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/productos" element={<Productos />} />
+                  <Route path="/producto/:id" element={<DetalleProducto />} />
+                  <Route path="/nosotros" element={<Nosotros />} />
+                  <Route path="/blog" element={<Blog />} />
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/registro" element={<Registro />} />
+                  <Route path="/perfil" element={<Perfil />} />
+                  <Route path="/carrito" element={<Carrito />} />
+                  <Route path="/contactanos" element={<Contactanos />} />
+                  <Route path="/admin" element={<AdminDashboard />} />
+                  <Route path="/categoria/:slug" element={<Categoria />} />
 
-          <Footer />
-        </Router>
+
+                </Routes>
+              </main>
+            </div>
+
+            <Footer />
+          </Router>
+        </CategoryProvider>
       </CartProvider>
     </AuthProvider>
   );

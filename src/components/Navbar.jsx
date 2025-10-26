@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import useCart from '../hooks/useCart';
 import { useAuth } from '../context/AuthContext';
+import { useCategories } from '../context/CategoryContext';
 import { useNavigate } from 'react-router-dom';
 import kjmsportsLogo from '../assets/images/logo1.jpg';
 // Recuerda que necesitas Font Awesome en index.html para el ícono del carrito
@@ -19,6 +20,7 @@ const formatPrice = (price) => {
 const Navbar = () => {
     const { cart, removeFromCart } = useCart();
     const { user, isAuthenticated, logout } = useAuth();
+    const { categories } = useCategories();
     const navigate = useNavigate();
 
     const calculateSubtotal = () => {
@@ -65,6 +67,23 @@ const Navbar = () => {
                         <li className="nav-item"><Link to="/nosotros" className="nav-link">Nosotros</Link></li>
                         <li className="nav-item"><Link to="/blog" className="nav-link">Blog</Link></li>
                         <li className="nav-item"><Link to="/contactanos" className="nav-link">Contáctanos</Link></li>
+                        <li className="nav-item dropdown">
+                            <a className="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                                Categorías
+                            </a>
+                            <ul className="dropdown-menu">
+                                {categories.map(category => (
+                                    <li key={category.id}>
+                                        <Link
+                                            to={`/categoria/${category.name.toLowerCase()}`}
+                                            className="dropdown-item"
+                                        >
+                                            {category.name.charAt(0).toUpperCase() + category.name.slice(1)}
+                                        </Link>
+                                    </li>
+                                ))}
+                            </ul>
+                        </li>
 
                     </ul>
 
@@ -91,14 +110,14 @@ const Navbar = () => {
                                     <li className="dropdown-item text-muted text-center">Tu carrito está vacío</li>
                                 ) : (
                                     <>
-                                        {cart.map((item, index) => (
-                                            <li key={index}>
+                                        {cart.map((item) => (
+                                            <li key={item.id}>
                                                 <div className="dropdown-item d-flex justify-content-between align-items-center">
                                                     <span>{item.nombre.substring(0, 20)}... - {formatPrice(item.precio)}</span>
 
                                                     <button
                                                         className="btn btn-sm btn-danger ms-2"
-                                                        onClick={(e) => handleRemove(e, index)}
+                                                        onClick={(e) => handleRemove(e, item.id)}
                                                     >
                                                         Eliminar
                                                     </button>
