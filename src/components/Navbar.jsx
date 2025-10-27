@@ -5,9 +5,9 @@ import { useAuth } from '../context/AuthContext';
 import { useCategories } from '../context/CategoryContext';
 import { useNavigate } from 'react-router-dom';
 import kjmsportsLogo from '../assets/images/logo1.jpg';
-// Recuerda que necesitas Font Awesome en index.html para el ícono del carrito
 
-// FUNCIÓN DE FORMATO CLP (La misma que usamos en Productos.jsx)
+
+
 const formatPrice = (price) => {
     return price.toLocaleString('es-CL', {
         style: 'currency',

@@ -12,7 +12,6 @@ const AuthProvider = ({ children }) => {
             if (savedUser) {
                 try {
                     const parsed = JSON.parse(savedUser);
-                    // intenta obtener la versión más reciente desde la lista `users`
                     const users = JSON.parse(localStorage.getItem('users') || '[]');
                     const fresh = users.find(u => u.correo === parsed.correo) || parsed;
                     setUser(fresh);
@@ -25,7 +24,7 @@ const AuthProvider = ({ children }) => {
 
         syncSavedUser();
 
-        // Escucha cambios de localStorage desde otras pestañas/ventanas
+       
         const onStorage = (e) => {
             if (e.key === 'user') {
                 if (e.newValue) {
@@ -36,7 +35,6 @@ const AuthProvider = ({ children }) => {
             }
 
             if (e.key === 'users') {
-                // si el usuario actual existe, intenta sincronizar su rol/props actualizados
                 const current = JSON.parse(localStorage.getItem('user') || 'null');
                 if (current) {
                     try {

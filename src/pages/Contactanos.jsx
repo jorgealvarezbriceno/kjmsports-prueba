@@ -15,7 +15,7 @@ const Contactanos = () => {
     const { name, value } = e.target;
     setFormData((p) => ({ ...p, [name]: value }));
 
-    // validación en tiempo real
+    
     if (name === 'nombre') setErrors((p) => ({ ...p, nombre: validateNombre(value) }));
     if (name === 'correo') setErrors((p) => ({ ...p, correo: validateCorreo(value) }));
     if (name === 'mensaje') setErrors((p) => ({ ...p, mensaje: validateMensaje(value) }));
@@ -32,7 +32,7 @@ const Contactanos = () => {
    
     };
 
-  // usa validateAll desde el módulo de validaciones
+
   const validateForm = () => {
     const { errors: newErrors, isValid } = validateAll(formData);
     setErrors(newErrors);

@@ -42,7 +42,7 @@ const DetalleProducto = () => {
                     <h2 className="mb-4">{producto.nombre}</h2>
                     <p className="lead mb-4">{producto.descripcion}</p>
 
-                    {/* Precio con oferta si aplica */}
+                    
                     <div className="mb-4">
                         {producto.precioOferta ? (
                             <>

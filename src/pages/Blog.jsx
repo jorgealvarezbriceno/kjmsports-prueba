@@ -1,11 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-/*
-  He reemplazado las imágenes por vídeos embebidos de YouTube usando iframes.
-  Si prefieres usar una librería (p. ej. react-player) lo puedo cambiar fácilmente.
-*/
-
 const VideoEmbed = ({ videoId, title }) => {
   const embedUrl = `https://www.youtube.com/embed/${videoId}`;
   return (

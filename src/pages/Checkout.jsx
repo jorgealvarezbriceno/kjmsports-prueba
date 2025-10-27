@@ -15,7 +15,7 @@ const Checkout = () => {
     const { cart, clearCart } = useCart();
     const navigate = useNavigate();
 
-    // Estados del formulario
+   
     const [formData, setFormData] = useState({
         nombre: '',
         apellido: '',
@@ -32,7 +32,7 @@ const Checkout = () => {
     const [errors, setErrors] = useState({});
     const [ordenGenerada, setOrdenGenerada] = useState(null);
 
-    // Calcular total
+    
     const calculateTotal = () => {
         return cart.reduce((sum, item) => {
             const precioFinal = item.precioOferta || item.precio;
@@ -40,7 +40,7 @@ const Checkout = () => {
         }, 0);
     };
 
-    // Validar formulario
+    
     const validateForm = () => {
         const newErrors = {};
 
@@ -60,14 +60,14 @@ const Checkout = () => {
         return Object.keys(newErrors).length === 0;
     };
 
-    // Manejar cambios en el formulario
+   
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prev => ({
             ...prev,
             [name]: value
         }));
-        // Limpiar error del campo cuando el usuario escribe
+       
         if (errors[name]) {
             setErrors(prev => ({
                 ...prev,
@@ -76,14 +76,14 @@ const Checkout = () => {
         }
     };
 
-    // Generar número de orden aleatorio
+    
     const generarNumeroOrden = () => {
         const timestamp = Date.now();
         const random = Math.floor(Math.random() * 1000);
         return `KJM-${timestamp}-${random}`;
     };
 
-    // Procesar pago
+    
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -92,7 +92,7 @@ const Checkout = () => {
             return;
         }
 
-        // Simular procesamiento de pago
+        
         const orden = {
             numeroOrden: generarNumeroOrden(),
             fecha: new Date().toLocaleString('es-CL'),
@@ -116,18 +116,18 @@ const Checkout = () => {
 
         setOrdenGenerada(orden);
 
-        // Guardar la orden en localStorage
+       
         const ordenes = JSON.parse(localStorage.getItem('ordenes') || '[]');
         ordenes.push(orden);
         localStorage.setItem('ordenes', JSON.stringify(ordenes));
 
-        // Limpiar carrito después de 2 segundos
+       
         setTimeout(() => {
             clearCart();
         }, 2000);
     };
 
-    // Si no hay productos en el carrito
+    
     if (cart.length === 0 && !ordenGenerada) {
         return (
             <div className="container my-5">
@@ -142,7 +142,6 @@ const Checkout = () => {
         );
     }
 
-    // Si la orden fue generada
     if (ordenGenerada) {
         return (
             <div className="container my-5">
@@ -225,7 +224,7 @@ const Checkout = () => {
         );
     }
 
-    // Formulario de checkout
+    
     const totalCompra = calculateTotal();
 
     return (
@@ -233,7 +232,7 @@ const Checkout = () => {
             <h2 className="text-center mb-5 display-5 fw-bold">Finalizar Compra</h2>
 
             <div className="row">
-                {/* Formulario */}
+              
                 <div className="col-lg-7">
                     <div className="card shadow-sm mb-4">
                         <div className="card-body">
@@ -425,7 +424,7 @@ const Checkout = () => {
                     </div>
                 </div>
 
-                {/* Resumen del Pedido */}
+                
                 <div className="col-lg-5">
                     <div className="card shadow-sm sticky-top" style={{ top: '20px' }}>
                         <div className="card-body">

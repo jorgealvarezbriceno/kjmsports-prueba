@@ -8,7 +8,7 @@ const AdminDashboard = () => {
     const { user, isAuthenticated } = useAuth();
     const [activeSection, setActiveSection] = useState('dashboard');
 
-    // Si no está autenticado o no es admin, redirigir a inicio
+    
     if (!isAuthenticated || !user?.isAdmin) {
         return <Navigate to="/" replace />;
     }

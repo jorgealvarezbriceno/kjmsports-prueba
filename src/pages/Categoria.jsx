@@ -17,7 +17,7 @@ const Categoria = () => {
   const { slug } = useParams();
   const { addToCart } = useCart();
 
-  // Filtrar productos por categoría
+  
   const productosFiltrados = productosData.filter(
     (producto) => producto.categoria === slug
   );

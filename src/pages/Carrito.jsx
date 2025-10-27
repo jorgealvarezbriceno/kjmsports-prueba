@@ -3,7 +3,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import useCart from '../hooks/useCart';
 
-//  formato CLP
+
 const formatPrice = (price) => {
     return price.toLocaleString('es-CL', {
         style: 'currency',
@@ -34,7 +34,7 @@ const Carrito = () => {
             <h2 className="text-center mb-5 display-5 fw-bold">Tu Carrito de Compras 🛍️</h2>
 
             {cart.length === 0 ? (
-                // Carrito Vacío
+               
                 <div className="alert alert-info text-center" role="alert">
                     Tu carrito está vacío. <a href="/productos" className="alert-link">¡Explora nuestros productos!</a>
                 </div>

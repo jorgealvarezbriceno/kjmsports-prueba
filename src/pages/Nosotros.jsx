@@ -24,10 +24,10 @@ const Nosotros = () => {
             ></div>
         </div>
       
-      {/* 1. Sección de Video y Visión */}
+     
       <div className="row align-items-center mb-5 p-4 shadow-lg rounded bg-white"> 
         
-        {/* Columna Izquierda: Visión de la Empresa */}
+       
         <div className="col-lg-6 col-md-6 col-sm-12 mb-4"> 
           <h3 className="fw-bold text-primary">Nuestra Visión: Líderes en Equipamiento Deportivo</h3>
           <p className="lead">
@@ -39,7 +39,7 @@ const Nosotros = () => {
           <Link to="/productos" className="btn btn-warning mt-3">Ver Nuestra Colección</Link>
         </div>
 
-        {/* Columna Derecha: Video Promocional */}
+       
         <div className="col-lg-6 col-md-6 col-sm-12 mb-4">
             <div className="ratio ratio-16x9 shadow-lg rounded">
                 <iframe 
@@ -57,7 +57,7 @@ const Nosotros = () => {
       <h3 className="text-center mb-4 fw-bold">Valores Fundamentales</h3>
       <div className="row p-4 rounded shadow-lg bg-secondary text-white"> 
           
-          {/* Rendimiento */}
+          
           <div className="col-md-4 mb-4">
             <div className="card h-100 p-3 text-center border-0 shadow-sm bg-dark text-white"> 
                 <i className="fas fa-running fa-3x text-success mb-3"></i>
@@ -66,7 +66,7 @@ const Nosotros = () => {
             </div>
           </div>
 
-          {/*  Integridad */}
+       
           <div className="col-md-4 mb-4">
             <div className="card h-100 p-3 text-center border-0 shadow-sm bg-dark text-white">
                 <i className="fas fa-hands-helping fa-3x text-info mb-3"></i>
@@ -75,7 +75,7 @@ const Nosotros = () => {
             </div>
           </div>
 
-          {/*  Comunidad */}
+         
           <div className="col-md-4 mb-4">
             <div className="card h-100 p-3 text-center border-0 shadow-sm bg-dark text-white">
                 <i className="fas fa-users fa-3x text-warning mb-3"></i>

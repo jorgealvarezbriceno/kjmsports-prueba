@@ -2,7 +2,7 @@ import React from 'react';
 import { productosData } from '../../data/productos';
 
 const ProductList = () => {
-    // Preferir los productos guardados en localStorage si existen, si no usar los productos por defecto
+  
     const saved = JSON.parse(localStorage.getItem('productos') || 'null');
     const initial = Array.isArray(saved) && saved.length ? saved : productosData;
 
@@ -51,7 +51,7 @@ const ProductList = () => {
             <div className="card-header d-flex justify-content-between align-items-center">
                 <h3 className="card-title mb-0">Lista de Productos</h3>
                 <button className="btn btn-primary btn-sm" onClick={() => {
-                    // Crear un nuevo producto mínimo y entrar en modo edición
+                    
                     const nuevo = {
                         id: Date.now(),
                         nombre: 'Nuevo producto',

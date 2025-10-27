@@ -5,7 +5,7 @@ const CartContext = createContext();
 const CartProvider = ({ children }) => {
     const [cart, setCart] = useState([]);
 
-    // Cargar el carrito desde localStorage cuando el componente se monta
+    
     useEffect(() => {
         const savedCart = localStorage.getItem('cart');
         if (savedCart) {
@@ -13,7 +13,7 @@ const CartProvider = ({ children }) => {
         }
     }, []);
 
-    // Guardar el carrito en localStorage cada vez que cambia
+    
     useEffect(() => {
         localStorage.setItem('cart', JSON.stringify(cart));
     }, [cart]);
