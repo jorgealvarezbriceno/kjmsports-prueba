@@ -58,7 +58,20 @@ const Productos = () => {
                     </div>
 
                     <div className="mt-3 d-flex justify-content-between align-items-center">
-                      <div className="fw-bold text-dark">{formatPrice(producto.precio)}</div>
+                      <div>
+                        {producto.precioOferta ? (
+                          <>
+                            <div className="text-decoration-line-through text-muted small">
+                              {formatPrice(producto.precio)}
+                            </div>
+                            <div className="fw-bold text-danger fs-5">
+                              {formatPrice(producto.precioOferta)}
+                            </div>
+                          </>
+                        ) : (
+                          <div className="fw-bold text-dark fs-5">{formatPrice(producto.precio)}</div>
+                        )}
+                      </div>
 
                       <div className="d-flex gap-2">
                         <button

@@ -18,8 +18,11 @@ const Carrito = () => {
 
     // 🟢 Función para calcular el total
     const calculateTotal = () => {
-        // Sumamos el precio * la cantidad de cada ítem
-        return cart.reduce((sum, item) => sum + parseFloat(item.precio * item.quantity), 0);
+        // Sumamos el precio * la cantidad de cada ítem (usando precio de oferta si existe)
+        return cart.reduce((sum, item) => {
+            const precioFinal = item.precioOferta || item.precio;
+            return sum + parseFloat(precioFinal * item.quantity);
+        }, 0);
     };
 
     const totalCompra = calculateTotal();
@@ -54,8 +57,28 @@ const Carrito = () => {
                                 <div className="card-body d-flex justify-content-between align-items-center p-3 w-100">
                                     <div style={{ flexGrow: 1 }}>
                                         <h5 className="card-title mb-1">{item.nombre}</h5>
-                                        {/* Precio total del ítem */}
-                                        <p className="card-text text-muted mb-0">Total: **{formatPrice(item.precio * item.quantity)}**</p>
+                                        {/* Precio unitario y total del ítem */}
+                                        <div className="mb-1">
+                                            {item.precioOferta ? (
+                                                <>
+                                                    <span className="text-decoration-line-through text-muted me-2" style={{ fontSize: '0.9em' }}>
+                                                        {formatPrice(item.precio)}
+                                                    </span>
+                                                    <span className="text-danger fw-bold">
+                                                        {formatPrice(item.precioOferta)}
+                                                    </span>
+                                                    <span className="text-muted ms-1" style={{ fontSize: '0.85em' }}>c/u</span>
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <span className="fw-bold">{formatPrice(item.precio)}</span>
+                                                    <span className="text-muted ms-1" style={{ fontSize: '0.85em' }}>c/u</span>
+                                                </>
+                                            )}
+                                        </div>
+                                        <p className="card-text text-muted mb-0">
+                                            Total: <strong>{formatPrice((item.precioOferta || item.precio) * item.quantity)}</strong>
+                                        </p>
                                     </div>
 
                                     <div className="d-flex align-items-center me-3">

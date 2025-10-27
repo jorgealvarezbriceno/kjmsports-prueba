@@ -24,7 +24,11 @@ const Navbar = () => {
     const navigate = useNavigate();
 
     const calculateSubtotal = () => {
-        const total = cart.reduce((sum, item) => sum + parseFloat(item.precio), 0);
+        const total = cart.reduce((sum, item) => {
+            // Usar precio de oferta si existe, de lo contrario usar precio normal
+            const precioFinal = item.precioOferta || item.precio;
+            return sum + parseFloat(precioFinal);
+        }, 0);
         return formatPrice(total);
     };
 
@@ -69,11 +73,11 @@ const Navbar = () => {
                         <li className="nav-item"><Link to="/contactanos" className="nav-link">Contáctanos</Link></li>
                         <li className="nav-item">
                             <Link to="/ofertas" className="nav-link text-danger fw-bold">
-                            <i className="fas fa-fire me-1"></i> Ofertas
+                                <i className="fas fa-fire me-1"></i> Ofertas
                             </Link>
-                            </li>
+                        </li>
                         <li className="nav-item dropdown">
-                                <a
+                            <a
                                 className="nav-link dropdown-toggle"
                                 href="#"
                                 id="categoriasDropdown"
@@ -85,22 +89,22 @@ const Navbar = () => {
                             </a>
                             <ul className="dropdown-menu" aria-labelledby="categoriasDropdown">
                                 <li>
-                                <Link to="/categoria/running" className="dropdown-item">
-                                    Running
-                                </Link>
+                                    <Link to="/categoria/running" className="dropdown-item">
+                                        Running
+                                    </Link>
                                 </li>
                                 <li>
-                                <Link to="/categoria/futbol" className="dropdown-item">
-                                    Fútbol
-                                </Link>
+                                    <Link to="/categoria/futbol" className="dropdown-item">
+                                        Fútbol
+                                    </Link>
                                 </li>
                                 <li>
-                                <Link to="/categoria/natacion" className="dropdown-item">
-                                    Natación
-                                </Link>
+                                    <Link to="/categoria/natacion" className="dropdown-item">
+                                        Natación
+                                    </Link>
                                 </li>
                             </ul>
-                            </li>
+                        </li>
 
                     </ul>
 
@@ -130,7 +134,23 @@ const Navbar = () => {
                                         {cart.map((item) => (
                                             <li key={item.id}>
                                                 <div className="dropdown-item d-flex justify-content-between align-items-center">
-                                                    <span>{item.nombre.substring(0, 20)}... - {formatPrice(item.precio)}</span>
+                                                    <div>
+                                                        <div>{item.nombre.substring(0, 20)}...</div>
+                                                        <div>
+                                                            {item.precioOferta ? (
+                                                                <>
+                                                                    <span className="text-decoration-line-through text-muted me-2" style={{ fontSize: '0.85em' }}>
+                                                                        {formatPrice(item.precio)}
+                                                                    </span>
+                                                                    <span className="text-danger fw-bold">
+                                                                        {formatPrice(item.precioOferta)}
+                                                                    </span>
+                                                                </>
+                                                            ) : (
+                                                                <span>{formatPrice(item.precio)}</span>
+                                                            )}
+                                                        </div>
+                                                    </div>
 
                                                     <button
                                                         className="btn btn-sm btn-danger ms-2"

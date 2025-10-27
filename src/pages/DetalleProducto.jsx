@@ -41,7 +41,27 @@ const DetalleProducto = () => {
                 <div className="col-md-6">
                     <h2 className="mb-4">{producto.nombre}</h2>
                     <p className="lead mb-4">{producto.descripcion}</p>
-                    <h3 className="text-primary mb-4">{formatPrice(producto.precio)}</h3>
+
+                    {/* Precio con oferta si aplica */}
+                    <div className="mb-4">
+                        {producto.precioOferta ? (
+                            <>
+                                <div className="d-flex align-items-center gap-3 mb-2">
+                                    <span className="badge bg-danger fs-6">
+                                        OFERTA -{Math.round(((producto.precio - producto.precioOferta) / producto.precio) * 100)}%
+                                    </span>
+                                </div>
+                                <div className="text-decoration-line-through text-muted fs-5">
+                                    {formatPrice(producto.precio)}
+                                </div>
+                                <h3 className="text-danger fw-bold mb-0">
+                                    {formatPrice(producto.precioOferta)}
+                                </h3>
+                            </>
+                        ) : (
+                            <h3 className="text-primary mb-0">{formatPrice(producto.precio)}</h3>
+                        )}
+                    </div>
 
                     <div className="d-grid gap-2">
                         <button
