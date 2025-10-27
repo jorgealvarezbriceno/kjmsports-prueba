@@ -12,26 +12,26 @@ import productos11 from '../assets/images/productos11.webp';
 import productos12 from '../assets/images/productos12.jpg';
 
 export const productosData = [
-  // ==================== CATEGORÍA: CORRER ====================
+  //  CATEGORÍA: CORRER
   {
     id: 1,
     nombre: 'Zapatillas ASICS Japan S - Masculino - Negro',
     precio: 55990,
-    precioOferta: 39990, // OFERTA: -29%
+    precioOferta: 39990, 
     imagen: productos1,
     descripcion: 'Confeccionadas con una mezcla de piel suave y disponibles en colores monocromáticos, el aspecto pulcro y atractivo de estas zapatillas te llevará de la oficina a la calle con gran estilo y comodidad.',
     unidad_moneda: 'CLP',
-    categoria: 'correr'
+    categoria: 'running'
   },
   {
     id: 2,
     nombre: 'Zapatillas ASICS Novablast 5',
     precio: 75990,
-    precioOferta: 59990, // OFERTA: -21%
+    precioOferta: 59990, 
     imagen: productos2,
     descripcion: 'La entresuela y la geometría de la suela exterior de las zapatillas para correr NOVABLAST® 5 ayudan a producir una carrera llena de energía.',
     unidad_moneda: 'CLP',
-    categoria: 'correr'
+    categoria: 'running'
   },
   {
     id: 8,
@@ -40,15 +40,15 @@ export const productosData = [
     imagen: productos8,
     descripcion: 'Inspirada en las aventuras de running todoterreno, la FUJITRAIL™ LOGO LONG SLEEVE TOP es un esencial de rendimiento diario para el trail running.',
     unidad_moneda: 'CLP',
-    categoria: 'correr'
+    categoria: 'running'
   },
 
-  // ==================== CATEGORÍA: FÚTBOL ====================
+  //  CATEGORÍA: FÚTBOL 
   {
     id: 4,
     nombre: 'Nike Phantom 6 Low Club',
     precio: 15750,
-    precioOferta: 9990, // OFERTA: -37%
+    precioOferta: 9990, 
     imagen: productos4,
     descripcion: 'Para comenzar o solo para jugar por diversión, los tacos Club te llevan al campo sin comprometer la calidad.',
     unidad_moneda: 'CLP',
@@ -58,19 +58,19 @@ export const productosData = [
     id: 5,
     nombre: 'Polera Anthony Edwards',
     precio: 12000,
-    precioOferta: 8900, // OFERTA: -26%
+    precioOferta: 8900, 
     imagen: productos5,
     descripcion: 'Representa a tu estrella en ascenso favorita con esta Anthony Edwards de adidas. Esta polera estampada celebra el juego dinámico y la energía infecciosa de uno de los jugadores más entretenidos.',
     unidad_moneda: 'CLP',
     categoria: 'futbol'
   },
 
-  // ==================== CATEGORÍA: NATACIÓN ====================
+  //  CATEGORÍA: NATACIÓN 
   {
     id: 10,
     nombre: 'Lentes Natación Unisex Biofuse 2.0 Negro',
     precio: 24990,
-    precioOferta: 18990, // OFERTA: -24%
+    precioOferta: 18990, 
     imagen: productos10,
     descripcion: 'Nuestras gafas Biofuse acaban de mejorar. Presentamos Biofuse 2.0. Aún con nuestra tecnología Speedo Biofuse® de mayor venta',
     unidad_moneda: 'CLP',
@@ -80,14 +80,14 @@ export const productosData = [
     id: 11,
     nombre: 'Naricera Natación Speedo Biofuse Clear',
     precio: 15990,
-    precioOferta: 11990, // OFERTA: -25%
+    precioOferta: 11990, 
     imagen: productos11,
     descripcion: 'Nuestro clip para la nariz más cómodo hasta la fecha. El Clip para la Nariz Biofuse ofrece el nivel perfecto de seguridad y comodidad',
     unidad_moneda: 'CLP',
     categoria: 'natacion'
   },
 
-  // ==================== CATEGORÍA: OTROS (opcional) ====================
+  //  OTROS 
   {
     id: 3,
     nombre: 'Nike Sportswear Club Fleece Polerón con gorro sin cierre para niños',

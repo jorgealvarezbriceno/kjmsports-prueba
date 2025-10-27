@@ -73,22 +73,34 @@ const Navbar = () => {
                             </Link>
                             </li>
                         <li className="nav-item dropdown">
-                            <a className="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                                <a
+                                className="nav-link dropdown-toggle"
+                                href="#"
+                                id="categoriasDropdown"
+                                role="button"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                            >
                                 Categorías
                             </a>
-                            <ul className="dropdown-menu">
-                                {categories.map(category => (
-                                    <li key={category.id}>
-                                        <Link
-                                            to={`/categoria/${category.name.toLowerCase()}`}
-                                            className="dropdown-item"
-                                        >
-                                            {category.name.charAt(0).toUpperCase() + category.name.slice(1)}
-                                        </Link>
-                                    </li>
-                                ))}
+                            <ul className="dropdown-menu" aria-labelledby="categoriasDropdown">
+                                <li>
+                                <Link to="/categoria/running" className="dropdown-item">
+                                    Running
+                                </Link>
+                                </li>
+                                <li>
+                                <Link to="/categoria/futbol" className="dropdown-item">
+                                    Fútbol
+                                </Link>
+                                </li>
+                                <li>
+                                <Link to="/categoria/natacion" className="dropdown-item">
+                                    Natación
+                                </Link>
+                                </li>
                             </ul>
-                        </li>
+                            </li>
 
                     </ul>
 

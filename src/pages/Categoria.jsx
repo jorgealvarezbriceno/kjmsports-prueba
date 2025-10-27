@@ -22,15 +22,15 @@ const Categoria = () => {
     (producto) => producto.categoria === slug
   );
 
-  // Mapear slug a nombre de categoría
+  
   const nombreCategoria = {
-    correr: 'Correr',
+    running: 'Running',
     futbol: 'Fútbol',
     natacion: 'Natación',
     otros: 'Otros Productos'
   }[slug] || 'Categoría';
 
-  // Manejar clic en "Agregar al carrito"
+  // Manejo del clickksss
   const handleAddToCart = (producto) => {
     addToCart(producto);
 
@@ -59,7 +59,7 @@ const Categoria = () => {
           </div>
         </div>
       ) : (
-        /* Grid de productos */
+        /* productos */
         <div className="row row-cols-1 row-cols-md-3 g-4">
           {productosFiltrados.map((producto) => (
             <div key={producto.id} className="col">
