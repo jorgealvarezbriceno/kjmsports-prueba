@@ -25,7 +25,7 @@ const Productos = () => {
         Nuestros Productos
       </h2>
 
-      {/* Card principal (featured) que contiene las cards pequeñas */}
+      {/* Card principal  que contiene las cards pequeñas */}
       <div className="card shadow-lg rounded-4 mb-5 featured-section" style={{ border: 'none' }}>
         <div className="card-body p-4">
           <div className="d-flex align-items-center justify-content-between mb-3">
