@@ -88,21 +88,20 @@ const Navbar = () => {
                                 Categorías
                             </a>
                             <ul className="dropdown-menu" aria-labelledby="categoriasDropdown">
-                                <li>
-                                    <Link to="/categoria/running" className="dropdown-item">
-                                        Running
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link to="/categoria/futbol" className="dropdown-item">
-                                        Fútbol
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link to="/categoria/natacion" className="dropdown-item">
-                                        Natación
-                                    </Link>
-                                </li>
+                                {categories.length > 0 ? (
+                                    categories.map((category) => (
+                                        <li key={category.id}>
+                                            <Link
+                                                to={`/categoria/${category.name.toLowerCase().replace(/\s+/g, '-')}`}
+                                                className="dropdown-item"
+                                            >
+                                                {category.name.charAt(0).toUpperCase() + category.name.slice(1)}
+                                            </Link>
+                                        </li>
+                                    ))
+                                ) : (
+                                    <li className="dropdown-item text-muted">No hay categorías</li>
+                                )}
                             </ul>
                         </li>
 
