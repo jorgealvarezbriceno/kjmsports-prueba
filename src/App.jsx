@@ -8,6 +8,7 @@ import Nosotros from './pages/Nosotros';
 import Blog from './pages/Blog';
 import Login from './pages/Login';
 import Carrito from './pages/Carrito';
+import Checkout from './pages/Checkout';
 import Contactanos from './pages/Contactanos';
 import { CartProvider } from './context/CartContext';
 import { AuthProvider } from './context/AuthContext';
@@ -39,6 +40,7 @@ function App() {
                   <Route path="/registro" element={<Registro />} />
                   <Route path="/perfil" element={<Perfil />} />
                   <Route path="/carrito" element={<Carrito />} />
+                  <Route path="/checkout" element={<Checkout />} />
                   <Route path="/contactanos" element={<Contactanos />} />
                   <Route path="/admin" element={<AdminDashboard />} />
                   <Route path="/categoria/:slug" element={<Categoria />} />

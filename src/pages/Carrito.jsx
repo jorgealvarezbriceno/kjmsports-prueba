@@ -1,5 +1,6 @@
 // src/pages/Carrito.jsx
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import useCart from '../hooks/useCart';
 
 // 🟢 Función de formato CLP
@@ -15,6 +16,7 @@ const formatPrice = (price) => {
 const Carrito = () => {
     // Obtenemos las nuevas funciones
     const { cart, increaseQuantity, decreaseQuantity, removeFromCart } = useCart();
+    const navigate = useNavigate();
 
     // 🟢 Función para calcular el total
     const calculateTotal = () => {
@@ -124,7 +126,10 @@ const Carrito = () => {
                                         <span>{formatPrice(totalCompra)}</span>
                                     </li>
                                 </ul>
-                                <button className="btn btn-success btn-lg w-100 mt-3" onClick={() => alert('Simulando proceso de pago...')}>
+                                <button
+                                    className="btn btn-success btn-lg w-100 mt-3"
+                                    onClick={() => navigate('/checkout')}
+                                >
                                     Proceder al Pago
                                 </button>
                             </div>
