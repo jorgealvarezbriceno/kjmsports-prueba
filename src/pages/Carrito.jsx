@@ -14,13 +14,13 @@ const formatPrice = (price) => {
 };
 
 const Carrito = () => {
-    //  nuevas funciones
+   
     const { cart, increaseQuantity, decreaseQuantity, removeFromCart } = useCart();
     const navigate = useNavigate();
 
-    // 🟢 Función calcular el total
+    
     const calculateTotal = () => {
-        // Sumamos el precio * la cantidad de cada ítem (usando precio de oferta si existe)
+        
         return cart.reduce((sum, item) => {
             const precioFinal = item.precioOferta || item.precio;
             return sum + parseFloat(precioFinal * item.quantity);
@@ -41,7 +41,7 @@ const Carrito = () => {
             ) : (
                 <div className="row">
 
-                    {/* Columna Izquierda: Lista de Ítems (Ancho 8) */}
+                    
                     <div className="col-lg-8">
                         <h4 className="mb-3">Artículos</h4>
                         {cart.map((item) => (
@@ -59,7 +59,7 @@ const Carrito = () => {
                                 <div className="card-body d-flex justify-content-between align-items-center p-3 w-100">
                                     <div style={{ flexGrow: 1 }}>
                                         <h5 className="card-title mb-1">{item.nombre}</h5>
-                                        {/* Precio unitario y total del ítem */}
+                                      
                                         <div className="mb-1">
                                             {item.precioOferta ? (
                                                 <>
@@ -84,7 +84,7 @@ const Carrito = () => {
                                     </div>
 
                                     <div className="d-flex align-items-center me-3">
-                                        {/* CONTROLES DE CANTIDAD */}
+                                        
                                         <button
                                             className="btn btn-sm btn-outline-secondary"
                                             onClick={() => decreaseQuantity(item.id)}
@@ -111,7 +111,7 @@ const Carrito = () => {
                         ))}
                     </div>
 
-                    {/* Columna Derecha: Resumen del Pedido (Ancho 4) */}
+                    
                     <div className="col-lg-4">
                         <div className="card shadow-lg sticky-top" style={{ top: '20px' }}>
                             <div className="card-body">

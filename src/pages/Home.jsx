@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom';
 import useCart from '../hooks/useCart';
 
 
-// Videos
+
 const YOUTUBE_VIDEO_ID = 'mEgg83JgkFw';
 const BOTTOM_YOUTUBE_VIDEO_ID = 'IyTv_SR2uUo'; 
 
 
-// Imágenes para los sliders (colócalas en src/assets/images)
+
 import RunningImg from '../assets/images/running.webp';
 import NatacionImg from '../assets/images/natacion.jpg';
 import FutbolImg from '../assets/images/futbol.jpg';
@@ -56,13 +56,13 @@ const Home = () => {
   const handleComprar = (producto, e) => {
     if (e && e.stopPropagation) e.stopPropagation();
     addToCart(producto);
-    // Puedes cambiar alert por un toast (recomendado) en el futuro
+    
     alert(`¡"${producto.nombre}" añadido al carrito!`);
   };
 
   return (
     <div className="container my-4">
-      {/* Título principal */}
+      
       <div className="text-center mb-5">
         <h2
           className="display-3 fw-bold text-uppercase text-dark"
@@ -80,11 +80,11 @@ const Home = () => {
         />
       </div>
 
-      {/* CAJA PRINCIPAL: Video (izquierda) + Slider (derecha) */}
+      
       <div className="card shadow-lg rounded-4 mb-5" style={{ border: 'none' }}>
         <div className="card-body p-4">
           <div className="row g-0 align-items-center">
-            {/* IZQUIERDA: Video */}
+            
             <div className="col-lg-6 col-md-12 p-4 order-1 order-lg-1">
               <div className="ratio ratio-16x9 shadow rounded-3 overflow-hidden" style={{ border: '1px solid rgba(0,0,0,0.06)' }}>
                 <iframe
@@ -97,7 +97,7 @@ const Home = () => {
               </div>
             </div>
 
-            {/* DERECHA: Carrusel superior (running, natacion, futbol) */}
+            
             <div className="col-lg-6 col-md-12 p-4 order-2 order-lg-2">
               <div
                 id="topCarousel"
@@ -176,7 +176,7 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Lo Más Vendido */}
+      
       <div className="card shadow-lg rounded-4 mb-5 featured-section" style={{ border: 'none' }}>
         <div className="card-body p-4">
           <div className="d-flex align-items-center justify-content-between mb-3">
@@ -237,11 +237,11 @@ const Home = () => {
         </div>
       </div>
 
-      {/* SEGUNDA CARD ABAJO: Video (izquierda) + Slider (derecha) con video looping */}
+      
       <div className="card shadow-lg rounded-4 mb-5" style={{ border: 'none' }}>
         <div className="card-body p-4">
           <div className="row g-0 align-items-center">
-            {/* IZQUIERDA: Video inferior que debe correr sin parar */}
+            
             <div className="col-lg-6 col-md-12 p-4 order-1 order-lg-1">
               <div className="ratio ratio-16x9 shadow rounded-3 overflow-hidden" style={{ border: '1px solid rgba(0,0,0,0.06)' }}>
                 <iframe
@@ -254,7 +254,7 @@ const Home = () => {
               </div>
             </div>
 
-            {/* DERECHA: Carrusel inferior con sliderhome images */}
+            
             <div className="col-lg-6 col-md-12 p-4 order-2 order-lg-2">
               <div
                 id="bottomCarousel"
