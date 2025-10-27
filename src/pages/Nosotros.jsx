@@ -1,13 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-// ID del video de YouTube 
+
 const YOUTUBE_VIDEO_ID = 'mEgg83JgkFw'; 
 
 const Nosotros = () => {
   return (
     <div className="container my-5">
-      {/* Título modernizado */}
       <div className="text-center mb-5">
             <h2 
                 className="display-3 fw-bold text-uppercase text-dark"
@@ -26,7 +25,6 @@ const Nosotros = () => {
         </div>
       
       {/* 1. Sección de Video y Visión */}
-      {/* 🟢 CORRECCIÓN: Cambiamos bg-light por bg-white para asegurar contraste con el nuevo fondo gris */}
       <div className="row align-items-center mb-5 p-4 shadow-lg rounded bg-white"> 
         
         {/* Columna Izquierda: Visión de la Empresa */}
@@ -54,16 +52,12 @@ const Nosotros = () => {
             </div>
         </div>
 
-      </div> {/* Fin de la fila */}
-
+      </div>
       <hr className="my-5" />
-
-      {/* 2. Sección de Valores (Fondo Oscuro) */}
       <h3 className="text-center mb-4 fw-bold">Valores Fundamentales</h3>
-      {/* Mantenemos bg-secondary para el contraste fuerte */}
       <div className="row p-4 rounded shadow-lg bg-secondary text-white"> 
           
-          {/* Valor 1: Rendimiento */}
+          {/* Rendimiento */}
           <div className="col-md-4 mb-4">
             <div className="card h-100 p-3 text-center border-0 shadow-sm bg-dark text-white"> 
                 <i className="fas fa-running fa-3x text-success mb-3"></i>
@@ -72,7 +66,7 @@ const Nosotros = () => {
             </div>
           </div>
 
-          {/* Valor 2: Integridad */}
+          {/*  Integridad */}
           <div className="col-md-4 mb-4">
             <div className="card h-100 p-3 text-center border-0 shadow-sm bg-dark text-white">
                 <i className="fas fa-hands-helping fa-3x text-info mb-3"></i>
@@ -81,7 +75,7 @@ const Nosotros = () => {
             </div>
           </div>
 
-          {/* Valor 3: Comunidad */}
+          {/*  Comunidad */}
           <div className="col-md-4 mb-4">
             <div className="card h-100 p-3 text-center border-0 shadow-sm bg-dark text-white">
                 <i className="fas fa-users fa-3x text-warning mb-3"></i>

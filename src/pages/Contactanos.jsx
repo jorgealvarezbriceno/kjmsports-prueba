@@ -1,157 +1,162 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { validateNombre, validateCorreo, validateMensaje, validateAll } from '../utils/contactanosValidation';
 
 const Contactanos = () => {
-    const [formData, setFormData] = useState({
-        nombre: '',
-        correo: '',
-        mensaje: ''
-    });
+  const [formData, setFormData] = useState({ nombre: '', correo: '', mensaje: '' });
+  const [errors, setErrors] = useState({ nombre: '', correo: '', mensaje: '' });
+  const [statusMessage, setStatusMessage] = useState(null);
 
-    const [message, setMessage] = useState('');
+  const nombreRef = useRef(null);
+  const correoRef = useRef(null);
+  const mensajeRef = useRef(null);
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData(prevData => ({
-            ...prevData,
-            [name]: value
-        }));
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((p) => ({ ...p, [name]: value }));
+
+    // validación en tiempo real
+    if (name === 'nombre') setErrors((p) => ({ ...p, nombre: validateNombre(value) }));
+    if (name === 'correo') setErrors((p) => ({ ...p, correo: validateCorreo(value) }));
+    if (name === 'mensaje') setErrors((p) => ({ ...p, mensaje: validateMensaje(value) }));
+  };
+
+    const handleBlur = (e) => {
+    const { name, value } = e.target;
+    let error = '';
+    if (name === 'nombre') error = validateNombre(value);
+    if (name === 'correo') error = validateCorreo(value);
+    if (name === 'mensaje') error = validateMensaje(value);
+
+    setErrors((p) => ({ ...p, [name]: error }));
+   
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        setMessage('');
+  // usa validateAll desde el módulo de validaciones
+  const validateForm = () => {
+    const { errors: newErrors, isValid } = validateAll(formData);
+    setErrors(newErrors);
+    return isValid;
+  };
 
-        // Validación simple
-        if (!formData.nombre || !formData.correo || !formData.mensaje) {
-            setMessage({ type: 'error', text: 'Por favor, completa todos los campos.' });
-            return;
-        }
-        // Validaciones detalladas
-        if (!formData.nombre.trim()) {
-            setMessage({ type: 'error', text: 'Por favor, ingresa tu nombre.' });
-            return;
-        }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setStatusMessage(null);
+    if (!validateForm()) {
+      setStatusMessage({ type: 'error', text: 'Corrige los errores antes de enviar.' });
+      return;
+    }
+    const mensajes = JSON.parse(localStorage.getItem('mensajes') || '[]');
+    const nuevo = { ...formData, id: Date.now(), fecha: new Date().toISOString() };
+    mensajes.push(nuevo);
+    localStorage.setItem('mensajes', JSON.stringify(mensajes));
+    setStatusMessage({ type: 'success', text: '¡Mensaje enviado con éxito! Te responderemos pronto.' });
+    setFormData({ nombre: '', correo: '', mensaje: '' });
+    setErrors({ nombre: '', correo: '', mensaje: '' });
+  };
 
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(formData.correo)) {
-            setMessage({ type: 'error', text: 'Por favor, ingresa un correo electrónico válido.' });
-            return;
-        }
+  const buttonStyle = {
+    background: 'linear-gradient(to right, #2bc0e4, #007bff)',
+    border: 'none',
+    color: 'white',
+    fontWeight: 'bold'
+  };
 
-        if (formData.mensaje.trim().length < 10) {
-            setMessage({ type: 'error', text: 'El mensaje debe tener al menos 10 caracteres.' });
-            return;
-        }
+  return (
+    <div className="container my-5">
+      <div className="row justify-content-center">
+        <div className="col-lg-8 col-md-10">
+          <div className="card p-4 shadow-lg bg-light">
+            <h2 className="text-center mb-4 display-6 fw-bold">Contáctanos</h2>
 
-        // Guardar mensaje en localStorage
-        const mensajes = JSON.parse(localStorage.getItem('mensajes') || '[]');
-        const nuevoMensaje = {
-            ...formData,
-            id: Date.now(),
-            fecha: new Date().toISOString()
-        };
-        mensajes.push(nuevoMensaje);
-        localStorage.setItem('mensajes', JSON.stringify(mensajes));
+            {statusMessage && (
+              <div className={`alert alert-${statusMessage.type === 'success' ? 'success' : 'danger'} mb-3`}>
+                {statusMessage.text}
+              </div>
+            )}
 
-        // Mostrar mensaje de éxito
-        setMessage({ type: 'success', text: '¡Mensaje enviado con éxito! Te responderemos pronto.' });
-        setMessage({ type: 'success', text: '¡Mensaje enviado con éxito! Te responderemos pronto.' });
-
-        // Limpiar formulario
-        setFormData({ nombre: '', correo: '', mensaje: '' });
-    };
-
-    // Estilo personalizado para el botón (simulando el degradado de tu imagen)
-    const buttonStyle = {
-        background: 'linear-gradient(to right, #2bc0e4, #007bff)', // Azul-Claro a Azul
-        border: 'none',
-        color: 'white',
-        fontWeight: 'bold'
-    };
-
-
-    return (
-        <div className="container my-5">
-            <div className="row justify-content-center">
-                <div className="col-lg-6 col-md-8">
-
-                    {/* 🟢 CORRECCIÓN AQUÍ: Usamos bg-light para un gris muy claro */}
-                    <div className="card p-4 shadow-lg bg-light">
-
-                        {/* El texto del título es oscuro por defecto, pero si necesitas forzarlo: text-dark */}
-                        <h2 className="text-center mb-4 display-6 fw-bold">Contactanos</h2>
-
-                        {message && (
-                            <div className={`alert alert-${message.type === 'success' ? 'success' : 'danger'} mb-3`}>
-                                {message.text}
-                            </div>
-                        )}
-
-                        <form onSubmit={handleSubmit}>
-
-                            {/* Campo Nombre */}
-                            <div className="mb-3">
-                                <label htmlFor="nombre" className="form-label fw-bold">Nombre</label>
-                                {/* Inputs con fondo blanco por defecto, se ven bien con card bg-light */}
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    id="nombre"
-                                    name="nombre"
-                                    value={formData.nombre}
-                                    onChange={handleChange}
-                                    required
-                                />
-                            </div>
-
-                            {/* Campo Correo */}
-                            <div className="mb-3">
-                                <label htmlFor="correo" className="form-label fw-bold">Correo</label>
-                                <input
-                                    type="email"
-                                    className="form-control"
-                                    id="correo"
-                                    name="correo"
-                                    value={formData.correo}
-                                    onChange={handleChange}
-                                    required
-                                />
-                            </div>
-
-                            {/* Campo Mensaje */}
-                            <div className="mb-4">
-                                <label htmlFor="mensaje" className="form-label fw-bold">Mensaje</label>
-                                <textarea
-                                    className="form-control"
-                                    id="mensaje"
-                                    name="mensaje"
-                                    rows="4"
-                                    value={formData.mensaje}
-                                    onChange={handleChange}
-                                    required
-                                ></textarea>
-                            </div>
-
-                            {/* Botón y Enlaces Inferiores */}
-                            <div className="d-flex justify-content-between align-items-center">
-                                <button type="submit" className="btn btn-lg" style={buttonStyle}>
-                                    Enviar Mensaje
-                                </button>
-
-                                {/* Enlaces de Registro/Inicio de Sesión, con color primario por defecto de Bootstrap */}
-                                <div className="text-end">
-                                    <Link to="/login" className="text-primary text-decoration-none me-3">Inicia sesión</Link>
-                                    <span className="text-muted">·</span>
-                                    <Link to="/registro" className="text-primary text-decoration-none ms-3">Registro</Link>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+            <form onSubmit={handleSubmit} noValidate>
+              <div className="mb-3">
+                <label htmlFor="nombre" className="form-label fw-bold">Nombre</label>
+                <input
+                  ref={nombreRef}
+                  id="nombre"
+                  name="nombre"
+                  type="text"
+                  className={`form-control ${errors.nombre ? 'is-invalid' : ''}`}
+                  value={formData.nombre}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  placeholder="Ej: Jorge Alvarado"
+                  aria-describedby="nombreHelp nombreError"
+                  required
+                />
+                <div id="nombreHelp" className="form-text">
+                  Ej: Jorge Alvarado — debe tener mínimo 10 caracteres y al menos dos palabras.
                 </div>
-            </div>
+                {errors.nombre && <div id="nombreError" className="invalid-feedback d-block">{errors.nombre}</div>}
+              </div>
+
+              <div className="mb-3">
+                <label htmlFor="correo" className="form-label fw-bold">Correo</label>
+                <input
+                  ref={correoRef}
+                  id="correo"
+                  name="correo"
+                  type="email"
+                  className={`form-control ${errors.correo ? 'is-invalid' : ''}`}
+                  value={formData.correo}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  placeholder="Ej: usuario@gmail.com"
+                  aria-describedby="correoHelp correoError"
+                  required
+                />
+                <div id="correoHelp" className="form-text">
+                  Ej:Los correos deben terminar en @gmail.com, @duocuc.cl, @profesor.cl 
+                </div>
+                {errors.correo && <div id="correoError" className="invalid-feedback d-block">{errors.correo}</div>}
+              </div>
+
+              <div className="mb-4">
+                <label htmlFor="mensaje" className="form-label fw-bold">Mensaje</label>
+                <textarea
+                  ref={mensajeRef}
+                  id="mensaje"
+                  name="mensaje"
+                  rows="8"
+                  className={`form-control ${errors.mensaje ? 'is-invalid' : ''}`}
+                  value={formData.mensaje}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  placeholder="Escribe tu mensaje aquí (mínimo 100 caracteres)..."
+                  aria-describedby="mensajeHelp mensajeError"
+                  required
+                />
+                <div id="mensajeHelp" className="form-text">
+                  Ejemplo: Describe tu consulta con detalles. Mínimo 100 caracteres.
+                </div>
+                <div className="form-text text-muted">Caracteres: {formData.mensaje.length}</div>
+                {errors.mensaje && <div id="mensajeError" className="invalid-feedback d-block">{errors.mensaje}</div>}
+              </div>
+
+              <div className="d-flex justify-content-between align-items-center">
+                <button type="submit" className="btn btn-lg" style={buttonStyle}>
+                  Enviar Mensaje
+                </button>
+
+                <div className="text-end">
+                  <Link to="/login" className="text-primary text-decoration-none me-3">Inicia sesión</Link>
+                  <span className="text-muted">·</span>
+                  <Link to="/registro" className="text-primary text-decoration-none ms-3">Registro</Link>
+                </div>
+              </div>
+            </form>
+          </div>
         </div>
-    );
+      </div>
+    </div>
+  );
 };
 
 export default Contactanos;

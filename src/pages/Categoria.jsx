@@ -30,7 +30,7 @@ const Categoria = () => {
     otros: 'Otros Productos'
   }[slug] || 'Categoría';
 
-  // Manejo del clickksss
+ 
   const handleAddToCart = (producto) => {
     addToCart(producto);
 

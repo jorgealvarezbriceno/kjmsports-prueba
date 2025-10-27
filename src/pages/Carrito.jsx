@@ -1,9 +1,9 @@
-// src/pages/Carrito.jsx
+
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import useCart from '../hooks/useCart';
 
-// 🟢 Función de formato CLP
+//  formato CLP
 const formatPrice = (price) => {
     return price.toLocaleString('es-CL', {
         style: 'currency',
@@ -14,11 +14,11 @@ const formatPrice = (price) => {
 };
 
 const Carrito = () => {
-    // Obtenemos las nuevas funciones
+    //  nuevas funciones
     const { cart, increaseQuantity, decreaseQuantity, removeFromCart } = useCart();
     const navigate = useNavigate();
 
-    // 🟢 Función para calcular el total
+    // 🟢 Función calcular el total
     const calculateTotal = () => {
         // Sumamos el precio * la cantidad de cada ítem (usando precio de oferta si existe)
         return cart.reduce((sum, item) => {
@@ -84,7 +84,7 @@ const Carrito = () => {
                                     </div>
 
                                     <div className="d-flex align-items-center me-3">
-                                        {/* 🟢 CONTROLES DE CANTIDAD */}
+                                        {/* CONTROLES DE CANTIDAD */}
                                         <button
                                             className="btn btn-sm btn-outline-secondary"
                                             onClick={() => decreaseQuantity(item.id)}

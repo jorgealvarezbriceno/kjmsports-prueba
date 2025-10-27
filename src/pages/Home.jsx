@@ -72,7 +72,7 @@ const Home = () => {
             textShadow: '1px 1px 2px rgba(0,0,0,0.08)',
           }}
         >
-          Bienvenido a KJM SPORTS <span role="img" aria-label="shopping-bags">🛍️</span>
+          Bienvenido a KJM SPORTS 
         </h2>
         <div
           className="mx-auto bg-primary"
@@ -87,7 +87,6 @@ const Home = () => {
             {/* IZQUIERDA: Video */}
             <div className="col-lg-6 col-md-12 p-4 order-1 order-lg-1">
               <div className="ratio ratio-16x9 shadow rounded-3 overflow-hidden" style={{ border: '1px solid rgba(0,0,0,0.06)' }}>
-                {/* Mantengo autoplay=1&mute=1 para permitir autoplay en la mayoría de navegadores */}
                 <iframe
                   src={`https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}?controls=1&modestbranding=1&autoplay=1&mute=1&rel=0`}
                   title="Video KJM SPORTS"
@@ -181,7 +180,7 @@ const Home = () => {
       <div className="card shadow-lg rounded-4 mb-5 featured-section" style={{ border: 'none' }}>
         <div className="card-body p-4">
           <div className="d-flex align-items-center justify-content-between mb-3">
-            <h3 className="mb-0 text-dark fw-bold">🔥 Lo Más Vendido de la Semana</h3>
+            <h3 className="mb-0 text-dark fw-bold">Lo Más Vendido de la Semana</h3>
             <Link to="/productos" className="btn btn-outline-dark">Ver Toda la Colección</Link>
           </div>
 
@@ -245,8 +244,6 @@ const Home = () => {
             {/* IZQUIERDA: Video inferior que debe correr sin parar */}
             <div className="col-lg-6 col-md-12 p-4 order-1 order-lg-1">
               <div className="ratio ratio-16x9 shadow rounded-3 overflow-hidden" style={{ border: '1px solid rgba(0,0,0,0.06)' }}>
-                {/* Para que YouTube repita el video sin parar usamos loop=1 y playlist=VIDEO_ID,
-                    además autoplay=1 y mute=1 para permitir autoplay en la mayoría de navegadores */}
                 <iframe
                   src={`https://www.youtube.com/embed/${BOTTOM_YOUTUBE_VIDEO_ID}?controls=1&modestbranding=1&autoplay=1&mute=1&loop=1&playlist=${BOTTOM_YOUTUBE_VIDEO_ID}&rel=0`}
                   title="Video KJM SPORTS - loop"

@@ -16,7 +16,6 @@ const Productos = () => {
   const { addToCart } = useCart();
   const handleComprar = (producto) => {
     addToCart(producto);
-    // puedes reemplazar alert por un toast si luego lo implementas
     alert(`¡"${producto.nombre}" añadido al carrito!`);
   };
 
@@ -31,7 +30,6 @@ const Productos = () => {
         <div className="card-body p-4">
           <div className="d-flex align-items-center justify-content-between mb-3">
             <h3 className="mb-0 text-dark fw-bold">Catálogo KJM</h3>
-            <Link to="/productos" className="btn btn-outline-dark">Ver Toda la Colección</Link>
           </div>
 
           <div className="row">
