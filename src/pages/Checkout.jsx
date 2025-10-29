@@ -15,7 +15,7 @@ const Checkout = () => {
     const { cart, clearCart } = useCart();
     const navigate = useNavigate();
 
-   
+
     const [formData, setFormData] = useState({
         nombre: '',
         apellido: '',
@@ -32,7 +32,7 @@ const Checkout = () => {
     const [errors, setErrors] = useState({});
     const [ordenGenerada, setOrdenGenerada] = useState(null);
 
-    
+
     const calculateTotal = () => {
         return cart.reduce((sum, item) => {
             const precioFinal = item.precioOferta || item.precio;
@@ -40,7 +40,7 @@ const Checkout = () => {
         }, 0);
     };
 
-    
+
     const validateForm = () => {
         const newErrors = {};
 
@@ -60,14 +60,14 @@ const Checkout = () => {
         return Object.keys(newErrors).length === 0;
     };
 
-   
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prev => ({
             ...prev,
             [name]: value
         }));
-       
+
         if (errors[name]) {
             setErrors(prev => ({
                 ...prev,
@@ -76,14 +76,14 @@ const Checkout = () => {
         }
     };
 
-    
+
     const generarNumeroOrden = () => {
         const timestamp = Date.now();
         const random = Math.floor(Math.random() * 1000);
         return `KJM-${timestamp}-${random}`;
     };
 
-    
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -92,7 +92,7 @@ const Checkout = () => {
             return;
         }
 
-        
+
         const orden = {
             numeroOrden: generarNumeroOrden(),
             fecha: new Date().toLocaleString('es-CL'),
@@ -116,18 +116,18 @@ const Checkout = () => {
 
         setOrdenGenerada(orden);
 
-       
+
         const ordenes = JSON.parse(localStorage.getItem('ordenes') || '[]');
         ordenes.push(orden);
         localStorage.setItem('ordenes', JSON.stringify(ordenes));
 
-       
+
         setTimeout(() => {
             clearCart();
         }, 2000);
     };
 
-    
+
     if (cart.length === 0 && !ordenGenerada) {
         return (
             <div className="container my-5">
@@ -210,7 +210,7 @@ const Checkout = () => {
                             </div>
                         </div>
 
-                        <div className="text-center mt-4">
+                        <div className="text-center mt-4 no-print">
                             <button className="btn btn-primary btn-lg me-2" onClick={() => navigate('/productos')}>
                                 Seguir Comprando
                             </button>
@@ -224,7 +224,7 @@ const Checkout = () => {
         );
     }
 
-    
+
     const totalCompra = calculateTotal();
 
     return (
@@ -232,7 +232,7 @@ const Checkout = () => {
             <h2 className="text-center mb-5 display-5 fw-bold">Finalizar Compra</h2>
 
             <div className="row">
-              
+
                 <div className="col-lg-7">
                     <div className="card shadow-sm mb-4">
                         <div className="card-body">
@@ -424,7 +424,7 @@ const Checkout = () => {
                     </div>
                 </div>
 
-                
+
                 <div className="col-lg-5">
                     <div className="card shadow-sm sticky-top" style={{ top: '20px' }}>
                         <div className="card-body">
