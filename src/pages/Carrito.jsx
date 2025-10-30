@@ -14,13 +14,13 @@ const formatPrice = (price) => {
 };
 
 const Carrito = () => {
-   
+
     const { cart, increaseQuantity, decreaseQuantity, removeFromCart } = useCart();
     const navigate = useNavigate();
 
-    
+
     const calculateTotal = () => {
-        
+
         return cart.reduce((sum, item) => {
             const precioFinal = item.precioOferta || item.precio;
             return sum + parseFloat(precioFinal * item.quantity);
@@ -34,14 +34,14 @@ const Carrito = () => {
             <h2 className="text-center mb-5 display-5 fw-bold">Tu Carrito de Compras 🛍️</h2>
 
             {cart.length === 0 ? (
-               
+
                 <div className="alert alert-info text-center" role="alert">
                     Tu carrito está vacío. <a href="/productos" className="alert-link">¡Explora nuestros productos!</a>
                 </div>
             ) : (
                 <div className="row">
 
-                    
+
                     <div className="col-lg-8">
                         <h4 className="mb-3">Artículos</h4>
                         {cart.map((item) => (
@@ -65,7 +65,7 @@ const Carrito = () => {
                                         <div className="card-body p-3">
                                             {/* Nombre del producto */}
                                             <h5 className="card-title mb-2">{item.nombre}</h5>
-                                            
+
                                             {/* Precio */}
                                             <div className="mb-2">
                                                 {item.precioOferta ? (
@@ -85,7 +85,7 @@ const Carrito = () => {
                                                     </>
                                                 )}
                                             </div>
-                                            
+
                                             {/* Total */}
                                             <p className="card-text text-muted mb-3">
                                                 Total: <strong>{formatPrice((item.precioOferta || item.precio) * item.quantity)}</strong>
@@ -126,7 +126,7 @@ const Carrito = () => {
                         ))}
                     </div>
 
-                    
+
                     <div className="col-lg-4">
                         <div className="card shadow-lg sticky-top" style={{ top: '20px' }}>
                             <div className="card-body">
