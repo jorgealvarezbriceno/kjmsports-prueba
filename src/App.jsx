@@ -6,6 +6,9 @@ import Productos from './pages/Productos';
 import DetalleProducto from './pages/DetalleProducto';
 import Nosotros from './pages/Nosotros';
 import Blog from './pages/Blog';
+import BlogCiclismo from './pages/BlogCiclismo';
+import BlogFutbol from './pages/BlogFutbol';
+import BlogNatacion from './pages/BlogNatacion';
 import Login from './pages/Login';
 import Carrito from './pages/Carrito';
 import Checkout from './pages/Checkout';
@@ -38,6 +41,9 @@ function App() {
                     <Route path="/producto/:id" element={<DetalleProducto />} />
                     <Route path="/nosotros" element={<Nosotros />} />
                     <Route path="/blog" element={<Blog />} />
+                    <Route path="/blog/ciclismo" element={<BlogCiclismo />} />
+                    <Route path="/blog/futbol" element={<BlogFutbol />} />
+                    <Route path="/blog/natacion" element={<BlogNatacion />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/registro" element={<Registro />} />
                     <Route path="/perfil" element={<Perfil />} />

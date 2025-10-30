@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -23,7 +24,6 @@ const VideoEmbed = ({ videoId, title }) => {
 export default function Blog() {
   return (
     <div className="container my-5">
-      {/* Título Modernizado (Similar a Productos.jsx) */}
       <div className="text-center mb-5">
         <h2
           className="display-3 fw-bold text-uppercase text-dark"
@@ -55,6 +55,9 @@ export default function Blog() {
             por intervalos para maximizar la capacidad pulmonar, mejorar la potencia en las piernas y superar
             ascensos desafiantes. Conoce los mejores métodos y el equipamiento esencial que necesitas.
           </p>
+          <Link to="/blog/ciclismo" className="btn btn-primary mt-2" aria-label="Leer reseña completa ciclismo">
+            Leer reseña completa
+          </Link>
         </div>
       </div>
 
@@ -72,6 +75,9 @@ export default function Blog() {
             natural, tu calzado es tu herramienta principal: te mostramos las diferencias entre el Gripknit y los
             materiales sintéticos, y cómo elegir el par que potencie tu precisión.
           </p>
+          <Link to="/blog/futbol" className="btn btn-primary mt-2" aria-label="Leer reseña completa futbol">
+            Leer reseña completa
+          </Link>
         </div>
       </div>
 
@@ -89,6 +95,9 @@ export default function Blog() {
             para respirar. Además, destacamos la importancia de unos lentes anti-vaho y anti-rayos UV para mantener
             la concentración. ¡Domina el agua!
           </p>
+          <Link to="/blog/natacion" className="btn btn-primary mt-2" aria-label="Leer reseña completa natacion">
+            Leer reseña completa
+          </Link>
         </div>
       </div>
 
