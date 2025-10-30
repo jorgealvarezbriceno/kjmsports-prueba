@@ -47,65 +47,80 @@ const Carrito = () => {
                         {cart.map((item) => (
                             <div
                                 key={item.id}
-                                className="card mb-3 shadow-sm d-flex flex-row align-items-center"
+                                className="card mb-3 shadow-sm"
                             >
-                                <img
-                                    src={item.imagen}
-                                    alt={item.nombre}
-                                    style={{ width: '80px', height: '80px', objectFit: 'cover', margin: '15px' }}
-                                    className="rounded"
-                                />
+                                <div className="row g-0">
+                                    {/* Imagen */}
+                                    <div className="col-4 col-md-2 d-flex align-items-center justify-content-center p-2">
+                                        <img
+                                            src={item.imagen}
+                                            alt={item.nombre}
+                                            className="img-fluid rounded"
+                                            style={{ maxHeight: '100px', objectFit: 'contain' }}
+                                        />
+                                    </div>
 
-                                <div className="card-body d-flex justify-content-between align-items-center p-3 w-100">
-                                    <div style={{ flexGrow: 1 }}>
-                                        <h5 className="card-title mb-1">{item.nombre}</h5>
-                                      
-                                        <div className="mb-1">
-                                            {item.precioOferta ? (
-                                                <>
-                                                    <span className="text-decoration-line-through text-muted me-2" style={{ fontSize: '0.9em' }}>
-                                                        {formatPrice(item.precio)}
-                                                    </span>
-                                                    <span className="text-danger fw-bold">
-                                                        {formatPrice(item.precioOferta)}
-                                                    </span>
-                                                    <span className="text-muted ms-1" style={{ fontSize: '0.85em' }}>c/u</span>
-                                                </>
-                                            ) : (
-                                                <>
-                                                    <span className="fw-bold">{formatPrice(item.precio)}</span>
-                                                    <span className="text-muted ms-1" style={{ fontSize: '0.85em' }}>c/u</span>
-                                                </>
-                                            )}
+                                    {/* Contenido */}
+                                    <div className="col-8 col-md-10">
+                                        <div className="card-body p-3">
+                                            {/* Nombre del producto */}
+                                            <h5 className="card-title mb-2">{item.nombre}</h5>
+                                            
+                                            {/* Precio */}
+                                            <div className="mb-2">
+                                                {item.precioOferta ? (
+                                                    <>
+                                                        <span className="text-decoration-line-through text-muted me-2 small">
+                                                            {formatPrice(item.precio)}
+                                                        </span>
+                                                        <span className="text-danger fw-bold">
+                                                            {formatPrice(item.precioOferta)}
+                                                        </span>
+                                                        <span className="text-muted ms-1 small">c/u</span>
+                                                    </>
+                                                ) : (
+                                                    <>
+                                                        <span className="fw-bold">{formatPrice(item.precio)}</span>
+                                                        <span className="text-muted ms-1 small">c/u</span>
+                                                    </>
+                                                )}
+                                            </div>
+                                            
+                                            {/* Total */}
+                                            <p className="card-text text-muted mb-3">
+                                                Total: <strong>{formatPrice((item.precioOferta || item.precio) * item.quantity)}</strong>
+                                            </p>
+
+                                            {/* Controles - Responsive */}
+                                            <div className="d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center gap-2">
+                                                {/* Cantidad */}
+                                                <div className="d-flex align-items-center">
+                                                    <button
+                                                        className="btn btn-sm btn-outline-secondary"
+                                                        onClick={() => decreaseQuantity(item.id)}
+                                                    >
+                                                        -
+                                                    </button>
+                                                    <span className="mx-3 fw-bold">{item.quantity}</span>
+                                                    <button
+                                                        className="btn btn-sm btn-outline-secondary"
+                                                        onClick={() => increaseQuantity(item.id)}
+                                                    >
+                                                        +
+                                                    </button>
+                                                </div>
+
+                                                {/* Botón eliminar */}
+                                                <button
+                                                    className="btn btn-danger btn-sm"
+                                                    onClick={() => removeFromCart(item.id)}
+                                                >
+                                                    <i className="fas fa-trash me-1"></i>
+                                                    Eliminar
+                                                </button>
+                                            </div>
                                         </div>
-                                        <p className="card-text text-muted mb-0">
-                                            Total: <strong>{formatPrice((item.precioOferta || item.precio) * item.quantity)}</strong>
-                                        </p>
                                     </div>
-
-                                    <div className="d-flex align-items-center me-3">
-                                        
-                                        <button
-                                            className="btn btn-sm btn-outline-secondary"
-                                            onClick={() => decreaseQuantity(item.id)}
-                                        >
-                                            -
-                                        </button>
-                                        <span className="mx-2 fw-bold">{item.quantity}</span>
-                                        <button
-                                            className="btn btn-sm btn-outline-secondary"
-                                            onClick={() => increaseQuantity(item.id)}
-                                        >
-                                            +
-                                        </button>
-                                    </div>
-
-                                    <button
-                                        className="btn btn-danger btn-sm"
-                                        onClick={() => removeFromCart(item.id)}
-                                    >
-                                        Eliminar
-                                    </button>
                                 </div>
                             </div>
                         ))}
