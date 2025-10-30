@@ -3,10 +3,11 @@ import { useAuth } from '../context/AuthContext';
 import { Navigate } from 'react-router-dom';
 import ProductList from '../components/admin/ProductList';
 import ProductCategories from '../components/admin/ProductCategories';
-import { productosData } from '../data/productos';
+import { useProducts } from '../context/ProductContext';
 
 const AdminDashboard = () => {
     const { user, isAuthenticated } = useAuth();
+    const { products } = useProducts();
     const [activeSection, setActiveSection] = useState('dashboard');
 
     // Función para convertir datos a CSV
@@ -46,7 +47,7 @@ const AdminDashboard = () => {
 
     // Exportar reporte de productos
     const exportarReporteProductos = () => {
-        const productosParaExportar = productosData.map(producto => ({
+        const productosParaExportar = products.map(producto => ({
             ID: producto.id,
             Nombre: producto.nombre,
             Precio: producto.precio,
@@ -101,6 +102,7 @@ const AdminDashboard = () => {
                 return <ReportsSection
                     onExportProducts={exportarReporteProductos}
                     onExportUsers={exportarReporteUsuarios}
+                    products={products}
                 />;
             default:
                 return (
@@ -187,12 +189,12 @@ const AdminDashboard = () => {
     );
 };
 
-const ReportsSection = ({ onExportProducts, onExportUsers }) => {
+const ReportsSection = ({ onExportProducts, onExportUsers, products }) => {
     const users = JSON.parse(localStorage.getItem('users') || '[]');
 
     // Calcular estadísticas
-    const totalProductos = productosData.length;
-    const productosConOferta = productosData.filter(p => p.precioOferta).length;
+    const totalProductos = products.length;
+    const productosConOferta = products.filter(p => p.precioOferta).length;
     const totalUsuarios = users.length;
     const totalAdmins = users.filter(u => u.isAdmin).length;
 

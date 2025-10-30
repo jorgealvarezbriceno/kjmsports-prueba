@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { productosData } from '../data/productos';
+import { useProducts } from '../context/ProductContext';
 import useCart from '../hooks/useCart';
-
+import Toast from '../components/Toast';
 
 const formatPrice = (price) => {
   return price.toLocaleString('es-CL', {
@@ -16,13 +16,12 @@ const formatPrice = (price) => {
 const Categoria = () => {
   const { slug } = useParams();
   const { addToCart } = useCart();
+  const { getProductsByCategory } = useProducts();
+  const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
 
-  
-  const productosFiltrados = productosData.filter(
-    (producto) => producto.categoria === slug
-  );
+  const productosFiltrados = getProductsByCategory(slug);
 
-  
   const nombreCategoria = {
     running: 'Running',
     futbol: 'Fútbol',
@@ -30,72 +29,118 @@ const Categoria = () => {
     otros: 'Otros Productos'
   }[slug] || 'Categoría';
 
- 
-  const handleAddToCart = (producto) => {
+  const handleComprar = (producto) => {
     addToCart(producto);
-
+    setToastMessage(`¡"${producto.nombre}" añadido al carrito!`);
+    setShowToast(true);
   };
 
   return (
-    <div className="container mt-5 mb-5">
-      {/* Título y botón volver */}
-      <div className="d-flex justify-content-between align-items-center mb-4">
-        <h2 className="fw-bold text-primary">{nombreCategoria}</h2>
-        <Link to="/productos" className="btn btn-outline-secondary">
-          ← Todos los productos
-        </Link>
-      </div>
+    <>
+      <Toast
+        message={toastMessage}
+        type="success"
+        show={showToast}
+        onClose={() => setShowToast(false)}
+      />
 
-      {/* Si no hay productos */}
-      {productosFiltrados.length === 0 ? (
-        <div className="text-center py-5">
-          <div className="alert alert-light">
-            <i className="fas fa-box-open fa-3x text-muted mb-3"></i>
-            <h4>No hay productos en esta categoría aún</h4>
-            <p className="text-muted">¡Vuelve pronto para ver nuevas llegadas!</p>
-            <Link to="/productos" className="btn btn-primary mt-3">
-              Explorar todos los productos
-            </Link>
+      <div className="container my-5">
+        <h2 className="text-center mb-5 display-3 fw-bold">
+          {nombreCategoria}
+        </h2>
+
+        {/* Si no hay productos */}
+        {productosFiltrados.length === 0 ? (
+          <div className="text-center py-5">
+            <div className="alert alert-light">
+              <i className="fas fa-box-open fa-3x text-muted mb-3 d-block"></i>
+              <h4>No hay productos en esta categoría aún</h4>
+              <p className="text-muted">¡Vuelve pronto para ver nuevas llegadas!</p>
+              <Link to="/productos" className="btn btn-primary mt-3">
+                Explorar todos los productos
+              </Link>
+            </div>
           </div>
-        </div>
-      ) : (
-        /* productos */
-        <div className="row row-cols-1 row-cols-md-3 g-4">
-          {productosFiltrados.map((producto) => (
-            <div key={producto.id} className="col">
-              <div className="card h-100 shadow-sm hover-shadow transition">
-                <img
-                  src={producto.imagen}
-                  className="card-img-top"
-                  alt={producto.nombre}
-                  style={{ height: '250px', objectFit: 'cover' }}
-                />
-                <div className="card-body d-flex flex-column">
-                  <h5 className="card-title fw-bold">{producto.nombre}</h5>
-                  <p className="card-text text-muted flex-grow-1 small">
-                    {producto.descripcion.length > 100
-                      ? `${producto.descripcion.substring(0, 100)}...`
-                      : producto.descripcion}
-                  </p>
-                  <div className="mt-auto">
-                    <p className="h4 text-primary fw-bold mb-3">
-                      {formatPrice(producto.precio)}
-                    </p>
-                    <button
-                      onClick={() => handleAddToCart(producto)}
-                      className="btn btn-success w-100"
-                    >
-                      <i className="fas fa-cart-plus me-2"></i>
-                      Agregar al carrito
-                    </button>
+        ) : (
+          <div className="card shadow-lg rounded-4 mb-5 featured-section" style={{ border: 'none' }}>
+            <div className="card-body p-4">
+              <div className="d-flex align-items-center justify-content-between mb-3">
+                <h3 className="mb-0 text-dark fw-bold">{nombreCategoria}</h3>
+                <Link to="/productos" className="btn btn-outline-dark">Ver Toda la Colección</Link>
+              </div>
+
+              <div className="row">
+                {productosFiltrados.map((producto) => (
+                  <div key={producto.id} className="col-xl-4 col-lg-6 col-md-6 col-sm-12 mb-4">
+                    <div className="card h-100 product-card bg-white">
+                      <div className="product-img overflow-hidden">
+                        <picture>
+                          <img
+                            src={producto.imagen}
+                            alt={producto.nombre}
+                            className="card-img-top"
+                            loading="lazy"
+                            sizes="(max-width: 576px) 100vw, (max-width: 992px) 50vw, 33vw"
+                            style={{ height: '200px', objectFit: 'contain', width: '100%', padding: '10px' }}
+                          />
+                        </picture>
+                      </div>
+
+                      <div className="card-body d-flex flex-column justify-content-between">
+                        <div>
+                          <h5 className="card-title text-primary">{producto.nombre}</h5>
+                          <p className="card-text text-muted small" style={{ minHeight: '2.2rem' }}>
+                            {producto.descripcion}
+                          </p>
+                        </div>
+
+                        <div className="mt-3 d-flex justify-content-between align-items-center">
+                          <div>
+                            {producto.precioOferta ? (
+                              <>
+                                <div className="text-decoration-line-through text-muted small">
+                                  {formatPrice(producto.precio)}
+                                </div>
+                                <div className="fw-bold text-danger fs-5">
+                                  {formatPrice(producto.precioOferta)}
+                                </div>
+                              </>
+                            ) : (
+                              <div className="fw-bold text-dark fs-5">{formatPrice(producto.precio)}</div>
+                            )}
+                          </div>
+
+                          <div className="d-flex gap-2">
+                            <button
+                              onClick={() => handleComprar(producto)}
+                              className="btn btn-success btn-sm fw-bold"
+                              aria-label={`Añadir ${producto.nombre} al carrito`}
+                            >
+                              Añadir al Carrito
+                            </button>
+
+                            <Link
+                              to={`/producto/${producto.id}`}
+                              className="btn btn-outline-primary btn-sm"
+                            >
+                              Ver Descripción
+                            </Link>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                </div>
+                ))}
               </div>
             </div>
-          ))}
+          </div>
+        )}
+
+        <div className="text-center mt-2 mb-5">
+          <Link to="/productos" className="btn btn-outline-dark btn-lg">Ver Toda la Colección</Link>
         </div>
-      )}
-    </div>
+      </div>
+    </>
   );
 };
 

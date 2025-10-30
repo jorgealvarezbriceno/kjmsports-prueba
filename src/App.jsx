@@ -13,6 +13,7 @@ import Contactanos from './pages/Contactanos';
 import { CartProvider } from './context/CartContext';
 import { AuthProvider } from './context/AuthContext';
 import { CategoryProvider } from './context/CategoryContext';
+import { ProductProvider } from './context/ProductContext';
 import Registro from './pages/Registro';
 import Perfil from './pages/Perfil';
 import AdminDashboard from './pages/AdminDashboard';
@@ -23,38 +24,40 @@ import Ofertas from './pages/Ofertas';
 function App() {
   return (
     <AuthProvider>
-      <CartProvider>
-        <CategoryProvider>
-          <Router>
-            <Navbar />
+      <ProductProvider>
+        <CartProvider>
+          <CategoryProvider>
+            <Router>
+              <Navbar />
 
-            <div className="content-container">
-              <main style={{ minHeight: '80vh' }}>
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/productos" element={<Productos />} />
-                  <Route path="/producto/:id" element={<DetalleProducto />} />
-                  <Route path="/nosotros" element={<Nosotros />} />
-                  <Route path="/blog" element={<Blog />} />
-                  <Route path="/login" element={<Login />} />
-                  <Route path="/registro" element={<Registro />} />
-                  <Route path="/perfil" element={<Perfil />} />
-                  <Route path="/carrito" element={<Carrito />} />
-                  <Route path="/checkout" element={<Checkout />} />
-                  <Route path="/contactanos" element={<Contactanos />} />
-                  <Route path="/admin" element={<AdminDashboard />} />
-                  <Route path="/categoria/:slug" element={<Categoria />} />
-                  <Route path="/ofertas" element={<Ofertas />} />
+              <div className="content-container">
+                <main style={{ minHeight: '80vh' }}>
+                  <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/productos" element={<Productos />} />
+                    <Route path="/producto/:id" element={<DetalleProducto />} />
+                    <Route path="/nosotros" element={<Nosotros />} />
+                    <Route path="/blog" element={<Blog />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/registro" element={<Registro />} />
+                    <Route path="/perfil" element={<Perfil />} />
+                    <Route path="/carrito" element={<Carrito />} />
+                    <Route path="/checkout" element={<Checkout />} />
+                    <Route path="/contactanos" element={<Contactanos />} />
+                    <Route path="/admin" element={<AdminDashboard />} />
+                    <Route path="/categoria/:slug" element={<Categoria />} />
+                    <Route path="/ofertas" element={<Ofertas />} />
 
 
-                </Routes>
-              </main>
-            </div>
+                  </Routes>
+                </main>
+              </div>
 
-            <Footer />
-          </Router>
-        </CategoryProvider>
-      </CartProvider>
+              <Footer />
+            </Router>
+          </CategoryProvider>
+        </CartProvider>
+      </ProductProvider>
     </AuthProvider>
   );
 }
